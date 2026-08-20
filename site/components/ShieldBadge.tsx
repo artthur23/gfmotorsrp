@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 type ShieldBadgeProps = {
   label: string;
   value: string;
@@ -5,31 +7,22 @@ type ShieldBadgeProps = {
 };
 
 export function ShieldBadge({ label, value, size = "md" }: ShieldBadgeProps) {
-  const dimension = size === "sm" ? "size-12" : "size-16";
+  const dimension = size === "sm" ? 34 : 44;
 
   return (
     <div className="flex items-center gap-3">
-      <div
-        className={`relative ${dimension} shrink-0 bg-gradient-to-br from-ink-soft via-[#2c2f33] to-ink-soft`}
-        style={{
-          clipPath:
-            "polygon(50% 0%, 100% 18%, 100% 62%, 50% 100%, 0% 62%, 0% 18%)",
-        }}
-      >
-        <span
-          className="absolute inset-x-0 top-0 h-[14%]"
-          style={{
-            background: "linear-gradient(90deg, #2f6b4f, #f2f1ee 50%, #a61e2b)",
-            clipPath: "polygon(50% 0%, 100% 100%, 50% 68%, 0% 100%)",
-            opacity: 0.9,
-          }}
-        />
-      </div>
+      <Image
+        src="/logo.png"
+        alt=""
+        width={dimension}
+        height={dimension * 1.19}
+        className="shrink-0"
+      />
       <div>
-        <p className="font-display text-sm font-bold uppercase tracking-wide text-ink">
+        <p className="font-display text-sm font-bold uppercase tracking-wide text-text-ondark">
           {value}
         </p>
-        <p className="text-xs text-text-onlight-dim">{label}</p>
+        <p className="text-xs text-text-ondark-dim">{label}</p>
       </div>
     </div>
   );
