@@ -16,7 +16,10 @@ function Track({ items }: { items: Differential[] }) {
         const Icon = ICONS[i % ICONS.length];
         return (
           <div key={d.titulo} className="flex shrink-0 items-center gap-3">
-            <span className="flex size-10 shrink-0 items-center justify-center rounded-lg border border-accent/30 bg-accent/20 text-accent">
+            <span
+              className="flex size-10 shrink-0 items-center justify-center rounded-lg border border-accent bg-ink text-accent"
+              style={{ boxShadow: "0 0 14px 1px rgba(166,30,43,.55)" }}
+            >
               <Icon size={19} />
             </span>
             <span className="whitespace-nowrap font-display text-base font-bold text-text-ondark">
