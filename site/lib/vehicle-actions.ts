@@ -94,7 +94,7 @@ export async function createVehicle(formData: FormData) {
 export async function updateVehicle(vehicleId: string, formData: FormData) {
   const data = parseVehicleForm(formData);
 
-  await prisma.vehicle.update({
+  const vehicle = await prisma.vehicle.update({
     where: { id: vehicleId },
     data,
   });
@@ -104,12 +104,16 @@ export async function updateVehicle(vehicleId: string, formData: FormData) {
 
   revalidatePath("/admin/veiculos");
   revalidatePath("/estoque");
+  revalidatePath(`/estoque/${vehicle.slug}`);
   revalidatePath("/");
   redirect("/admin/veiculos");
 }
 
 export async function deleteVehicle(vehicleId: string) {
-  const photos = await prisma.vehiclePhoto.findMany({ where: { vehicleId } });
+  const [vehicle, photos] = await Promise.all([
+    prisma.vehicle.findUnique({ where: { id: vehicleId }, select: { slug: true } }),
+    prisma.vehiclePhoto.findMany({ where: { vehicleId } }),
+  ]);
   await prisma.vehicle.delete({ where: { id: vehicleId } });
 
   for (const photo of photos) {
@@ -118,14 +122,22 @@ export async function deleteVehicle(vehicleId: string) {
 
   revalidatePath("/admin/veiculos");
   revalidatePath("/estoque");
+  if (vehicle) revalidatePath(`/estoque/${vehicle.slug}`);
   revalidatePath("/");
 }
 
 export async function deleteVehiclePhoto(photoId: string) {
-  const photo = await prisma.vehiclePhoto.findUnique({ where: { id: photoId } });
+  const photo = await prisma.vehiclePhoto.findUnique({
+    where: { id: photoId },
+    include: { vehicle: { select: { slug: true } } },
+  });
   if (!photo) return;
 
   await prisma.vehiclePhoto.delete({ where: { id: photoId } });
   await deleteUpload(photo.url);
+
   revalidatePath("/admin/veiculos");
+  revalidatePath("/estoque");
+  revalidatePath(`/estoque/${photo.vehicle.slug}`);
+  revalidatePath("/");
 }

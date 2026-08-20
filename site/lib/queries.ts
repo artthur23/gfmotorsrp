@@ -85,6 +85,11 @@ export async function getVehicleBrands() {
   return rows.map((r) => r.brand);
 }
 
+export async function getAllVehicleSlugs() {
+  const rows = await prisma.vehicle.findMany({ select: { slug: true } });
+  return rows.map((r) => r.slug);
+}
+
 export async function getVehicleBySlug(slug: string) {
   return prisma.vehicle.findUnique({
     where: { slug },

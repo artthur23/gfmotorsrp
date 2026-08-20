@@ -82,6 +82,7 @@ model Vehicle {
   @@index([status])
   @@index([category])
   @@index([featured])
+  @@index([brand])
 }
 
 model VehiclePhoto {

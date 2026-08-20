@@ -12,7 +12,10 @@ import {
 } from "@/lib/queries";
 import { whatsappLink } from "@/lib/format";
 
-export const dynamic = "force-dynamic";
+// Estática com revalidação: fica em cache (rápida, sem round-trip ao
+// banco a cada visita) e é regenerada na hora quando o admin edita
+// veículos/conteúdo (revalidatePath nas actions) ou, no máximo, a cada hora.
+export const revalidate = 3600;
 
 const ADDRESS = "Av. Professor João Fiúsa, 945 - B. Alto da Boa Vista, Ribeirão Preto - SP";
 

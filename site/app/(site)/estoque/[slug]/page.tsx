@@ -4,7 +4,7 @@ import { Calendar, Fuel, Gauge, Palette, Settings2 } from "lucide-react";
 import { VehicleCard } from "@/components/VehicleCard";
 import { VehicleGallery } from "@/components/VehicleGallery";
 import { VehicleFeatures } from "@/components/VehicleFeatures";
-import { getSimilarVehicles, getVehicleBySlug } from "@/lib/queries";
+import { getAllVehicleSlugs, getSimilarVehicles, getVehicleBySlug } from "@/lib/queries";
 import {
   categoryLabel,
   formatKm,
@@ -15,6 +15,18 @@ import {
   vehicleWhatsappMessage,
   whatsappLink,
 } from "@/lib/format";
+
+// Pré-renderiza todas as páginas de veículo no build (carregamento
+// instantâneo, servido estático). Veículos cadastrados depois continuam
+// funcionando normalmente (renderizados sob demanda na primeira visita).
+export async function generateStaticParams() {
+  const slugs = await getAllVehicleSlugs();
+  return slugs.map((slug) => ({ slug }));
+}
+
+// Revalidação de segurança a cada hora, além do revalidatePath já
+// disparado pelas actions do admin quando um veículo é editado.
+export const revalidate = 3600;
 
 export default async function VehiclePage({
   params,
