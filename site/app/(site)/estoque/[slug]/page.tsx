@@ -4,6 +4,7 @@ import { Calendar, Fuel, Gauge, Palette, Settings2 } from "lucide-react";
 import { VehicleCard } from "@/components/VehicleCard";
 import { LeadForm } from "@/components/LeadForm";
 import { VehicleGallery } from "@/components/VehicleGallery";
+import { VehicleFeatures } from "@/components/VehicleFeatures";
 import { getSimilarVehicles, getVehicleBySlug } from "@/lib/queries";
 import {
   categoryLabel,
@@ -39,6 +40,16 @@ export default async function VehiclePage({
     ...(vehicle.color ? [{ icon: Palette, label: "Cor", value: vehicle.color }] : []),
   ];
 
+  const fichaTecnica = [
+    { label: "Tipo de carroceria", value: categoryLabel(vehicle.category) },
+    { label: "Ano de fabricação", value: String(vehicle.yearFab) },
+    { label: "Ano do modelo", value: String(vehicle.yearModel) },
+    { label: "Quilometragem", value: formatKm(vehicle.km) },
+    { label: "Câmbio", value: transmissionLabel(vehicle.transmission) },
+    { label: "Combustível", value: fuelLabel(vehicle.fuel) },
+    ...(vehicle.color ? [{ label: "Cor", value: vehicle.color }] : []),
+  ];
+
   return (
     <div className="mx-auto max-w-6xl px-5 py-10">
       <nav className="mb-6 text-xs text-text-onlight-dim">
@@ -51,15 +62,6 @@ export default async function VehiclePage({
       <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1.3fr_.9fr]">
         <div className="min-w-0">
           <VehicleGallery photos={photos} title={vehicleTitle(vehicle)} />
-
-          {vehicle.description && (
-            <div className="mt-8">
-              <h2 className="font-display text-lg font-bold text-text-onlight">Descrição</h2>
-              <p className="mt-2 text-sm leading-relaxed text-text-onlight-dim">
-                {vehicle.description}
-              </p>
-            </div>
-          )}
         </div>
 
         <div className="min-w-0">
@@ -103,6 +105,39 @@ export default async function VehiclePage({
             <LeadForm vehicleId={vehicle.id} />
           </div>
         </div>
+      </div>
+
+      <div className="mt-12 grid grid-cols-1 gap-10 lg:grid-cols-[1.3fr_.9fr]">
+        <div className="min-w-0 space-y-10">
+          <div>
+            <h2 className="mb-4 font-display text-lg font-bold text-text-onlight">
+              Ficha técnica
+            </h2>
+            <div className="grid grid-cols-1 gap-x-8 rounded-2xl border border-line-light bg-surface p-5 sm:grid-cols-2 sm:p-6">
+              {fichaTecnica.map((item) => (
+                <div
+                  key={item.label}
+                  className="flex items-center justify-between gap-4 border-b border-line-light py-3"
+                >
+                  <span className="text-xs text-text-onlight-dim">{item.label}</span>
+                  <span className="text-sm font-bold text-text-onlight">{item.value}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <VehicleFeatures features={vehicle.features} />
+
+          {vehicle.description && (
+            <div>
+              <h2 className="font-display text-lg font-bold text-text-onlight">Descrição</h2>
+              <p className="mt-2 whitespace-pre-line text-sm leading-relaxed text-text-onlight-dim">
+                {vehicle.description}
+              </p>
+            </div>
+          )}
+        </div>
+        <div className="hidden lg:block" />
       </div>
 
       {similar.length > 0 && (

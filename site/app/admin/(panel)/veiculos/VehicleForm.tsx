@@ -24,6 +24,7 @@ type VehicleFormData = {
   color: string | null;
   category: string;
   description: string | null;
+  features: string[];
   status: string;
   featured: boolean;
   photos: { id: string; url: string }[];
@@ -147,6 +148,16 @@ export function VehicleForm({
           name="description"
           rows={4}
           defaultValue={vehicle?.description ?? ""}
+          className={INPUT}
+        />
+      </Field>
+
+      <Field label="Equipamentos e opcionais (separados por vírgula)">
+        <textarea
+          name="features"
+          rows={3}
+          defaultValue={vehicle?.features.join(", ") ?? ""}
+          placeholder="Ar-condicionado, Bluetooth, Câmera de ré, Bancos em couro..."
           className={INPUT}
         />
       </Field>

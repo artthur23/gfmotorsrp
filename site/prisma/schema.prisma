@@ -70,6 +70,7 @@ model Vehicle {
   color        String?
   category     VehicleCategory
   description  String?
+  features     String[]        @default([])
   status       VehicleStatus   @default(DISPONIVEL)
   featured     Boolean         @default(false)
   createdAt    DateTime        @default(now())

@@ -29,11 +29,18 @@ const vehicleSchema = z.object({
     "ESPORTIVO",
   ]),
   description: z.string().trim().optional(),
+  features: z.array(z.string()).default([]),
   status: z.enum(["DISPONIVEL", "RESERVADO", "VENDIDO"]),
   featured: z.coerce.boolean().optional(),
 });
 
 function parseVehicleForm(formData: FormData) {
+  const featuresRaw = (formData.get("features") as string | null) ?? "";
+  const features = featuresRaw
+    .split(",")
+    .map((f) => f.trim())
+    .filter(Boolean);
+
   return vehicleSchema.parse({
     brand: formData.get("brand"),
     model: formData.get("model"),
@@ -47,6 +54,7 @@ function parseVehicleForm(formData: FormData) {
     color: formData.get("color") || undefined,
     category: formData.get("category"),
     description: formData.get("description") || undefined,
+    features,
     status: formData.get("status"),
     featured: formData.get("featured") === "on",
   });
