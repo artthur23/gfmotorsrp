@@ -107,37 +107,34 @@ export default async function VehiclePage({
         </div>
       </div>
 
-      <div className="mt-12 grid grid-cols-1 gap-10 lg:grid-cols-[1.3fr_.9fr]">
-        <div className="min-w-0 space-y-10">
-          <div>
-            <h2 className="mb-4 font-display text-lg font-bold text-text-onlight">
-              Ficha técnica
-            </h2>
-            <div className="grid grid-cols-1 gap-x-8 rounded-2xl border border-line-light bg-surface p-5 sm:grid-cols-2 sm:p-6">
-              {fichaTecnica.map((item) => (
-                <div
-                  key={item.label}
-                  className="flex items-center justify-between gap-4 border-b border-line-light py-3"
-                >
-                  <span className="text-xs text-text-onlight-dim">{item.label}</span>
-                  <span className="text-sm font-bold text-text-onlight">{item.value}</span>
-                </div>
-              ))}
-            </div>
+      <div className="mt-12 space-y-10">
+        <div>
+          <h2 className="mb-4 font-display text-lg font-bold text-text-onlight">
+            Ficha técnica
+          </h2>
+          <div className="grid grid-cols-1 gap-x-8 rounded-2xl border border-line-light bg-surface p-5 sm:grid-cols-2 sm:p-6">
+            {fichaTecnica.map((item) => (
+              <div
+                key={item.label}
+                className="flex items-center justify-between gap-4 border-b border-line-light py-3"
+              >
+                <span className="text-xs text-text-onlight-dim">{item.label}</span>
+                <span className="text-sm font-bold text-text-onlight">{item.value}</span>
+              </div>
+            ))}
           </div>
-
-          <VehicleFeatures features={vehicle.features} />
-
-          {vehicle.description && (
-            <div>
-              <h2 className="font-display text-lg font-bold text-text-onlight">Descrição</h2>
-              <p className="mt-2 whitespace-pre-line text-sm leading-relaxed text-text-onlight-dim">
-                {vehicle.description}
-              </p>
-            </div>
-          )}
         </div>
-        <div className="hidden lg:block" />
+
+        <VehicleFeatures features={vehicle.features} />
+
+        {vehicle.description && (
+          <div>
+            <h2 className="font-display text-lg font-bold text-text-onlight">Descrição</h2>
+            <p className="mt-2 whitespace-pre-line text-sm leading-relaxed text-text-onlight-dim">
+              {vehicle.description}
+            </p>
+          </div>
+        )}
       </div>
 
       {similar.length > 0 && (
