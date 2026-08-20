@@ -3,7 +3,6 @@ import { AtSign, Clock, MapPin, MessageCircle, Phone, ShieldCheck, Star, CheckCi
 import { Button } from "@/components/Button";
 import { VehicleCard } from "@/components/VehicleCard";
 import { ShieldBadge } from "@/components/ShieldBadge";
-import { LeadForm } from "@/components/LeadForm";
 import {
   getApprovedTestimonials,
   getDifferentials,
@@ -237,21 +236,6 @@ export default async function HomePage() {
       {/* Localização + Contato */}
       <section id="contato" className="scroll-mt-20 bg-ink py-16 text-text-ondark">
         <div id="localizacao" className="scroll-mt-20 mx-auto max-w-6xl px-5">
-          <div className="relative mb-6 aspect-21/9 w-full overflow-hidden border border-white/10 sm:aspect-32/9">
-            <Image
-              src="/team/givago-fachada.png"
-              alt="Fachada da GF Motors em Ribeirão Preto"
-              fill
-              quality={90}
-              sizes="(min-width: 1152px) 1112px, 100vw"
-              className="object-cover"
-            />
-            <div className="absolute inset-0 bg-linear-to-t from-ink/90 via-ink/10 to-transparent" />
-            <p className="absolute bottom-4 left-4 font-data text-xs uppercase tracking-widest text-text-ondark sm:bottom-6 sm:left-6">
-              Nossa loja em Ribeirão Preto
-            </p>
-          </div>
-
           <div className="grid grid-cols-1 border border-white/10 lg:grid-cols-[.85fr_1.15fr]">
             <div className="bg-ink-soft p-8 lg:p-12">
               <p className="flex items-center gap-2 font-data text-xs uppercase tracking-widest text-accent">
@@ -331,13 +315,6 @@ export default async function HomePage() {
                 referrerPolicy="no-referrer-when-downgrade"
               />
             </div>
-          </div>
-
-          <div className="mt-6 border border-white/10 bg-ink-soft p-6">
-            <p className="mb-4 text-sm text-text-ondark-dim">
-              Prefere que a gente te retorne? Deixa seus dados aqui.
-            </p>
-            <LeadForm />
           </div>
         </div>
       </section>
