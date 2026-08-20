@@ -201,9 +201,9 @@ export default async function HomePage() {
                   priority
                 />
               </div>
-              <div className="mt-3 flex justify-center gap-3 px-2">
-                <span className="h-1.5 w-2/5 rounded-full" style={{ background: "#2f6b4f" }} />
-                <span className="h-1.5 w-2/5 rounded-full bg-accent" />
+              <div className="mt-3 flex items-center gap-4 px-1">
+                <span className="h-1.5 w-[30%] rounded-full" style={{ background: "#2f6b4f" }} />
+                <span className="h-1.5 w-[45%] rounded-full bg-accent" />
               </div>
             </div>
 
