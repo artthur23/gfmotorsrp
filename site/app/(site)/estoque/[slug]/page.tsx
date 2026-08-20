@@ -2,7 +2,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Calendar, Fuel, Gauge, Palette, Settings2 } from "lucide-react";
 import { VehicleCard } from "@/components/VehicleCard";
-import { LeadForm } from "@/components/LeadForm";
 import { VehicleGallery } from "@/components/VehicleGallery";
 import { VehicleFeatures } from "@/components/VehicleFeatures";
 import { getSimilarVehicles, getVehicleBySlug } from "@/lib/queries";
@@ -97,13 +96,6 @@ export default async function VehiclePage({
           >
             Falar no WhatsApp sobre esse veículo
           </a>
-
-          <div className="mt-6">
-            <h2 className="mb-3 font-display text-sm font-bold uppercase tracking-wide text-text-onlight">
-              Ou deixe seus dados
-            </h2>
-            <LeadForm vehicleId={vehicle.id} />
-          </div>
         </div>
       </div>
 
