@@ -1,9 +1,9 @@
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Calendar, Fuel, Gauge, Palette, Settings2 } from "lucide-react";
 import { VehicleCard } from "@/components/VehicleCard";
 import { LeadForm } from "@/components/LeadForm";
+import { VehicleGallery } from "@/components/VehicleGallery";
 import { getSimilarVehicles, getVehicleBySlug } from "@/lib/queries";
 import {
   categoryLabel,
@@ -26,7 +26,10 @@ export default async function VehiclePage({
   if (!vehicle) notFound();
 
   const similar = await getSimilarVehicles(vehicle);
-  const cover = vehicle.photos[0]?.url ?? "/vehicle-placeholder.svg";
+  const photos =
+    vehicle.photos.length > 0
+      ? vehicle.photos
+      : [{ id: "placeholder", url: "/vehicle-placeholder.svg" }];
 
   const specs = [
     { icon: Calendar, label: "Ano", value: `${vehicle.yearFab}/${vehicle.yearModel}` },
@@ -47,26 +50,7 @@ export default async function VehiclePage({
 
       <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1.3fr_.9fr]">
         <div>
-          <div className="relative aspect-4/3 overflow-hidden rounded-2xl bg-ink">
-            <Image
-              src={cover}
-              alt={vehicleTitle(vehicle)}
-              fill
-              quality={90}
-              sizes="(min-width: 1024px) 660px, 100vw"
-              className="object-cover"
-              priority
-            />
-          </div>
-          {vehicle.photos.length > 1 && (
-            <div className="mt-2 grid grid-cols-4 gap-2 sm:grid-cols-6">
-              {vehicle.photos.map((p) => (
-                <div key={p.id} className="relative aspect-square overflow-hidden rounded-lg bg-ink">
-                  <Image src={p.url} alt="" fill quality={90} sizes="140px" className="object-cover" />
-                </div>
-              ))}
-            </div>
-          )}
+          <VehicleGallery photos={photos} title={vehicleTitle(vehicle)} />
 
           {vehicle.description && (
             <div className="mt-8">
