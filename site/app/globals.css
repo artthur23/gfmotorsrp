@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+:root {
+  --color-ink: #0e0f11;
+  --color-ink-soft: #17191c;
+  --color-paper: #f1f2f2;
+  --color-surface: #ffffff;
+  --color-accent: #a61e2b;
+  --color-accent-strong: #c4212f;
+  --color-chrome: #9aa0a5;
+  --color-chrome-light: #d8dadc;
+  --color-line-dark: #26292d;
+  --color-line-light: #e2e0dc;
+  --color-text-onlight: #14161a;
+  --color-text-onlight-dim: #52585e;
+  --color-text-ondark: #f2f1ee;
+  --color-text-ondark-dim: #a7acb0;
+}
+
+@theme inline {
+  --color-ink: var(--color-ink);
+  --color-ink-soft: var(--color-ink-soft);
+  --color-paper: var(--color-paper);
+  --color-surface: var(--color-surface);
+  --color-accent: var(--color-accent);
+  --color-accent-strong: var(--color-accent-strong);
+  --color-chrome: var(--color-chrome);
+  --color-chrome-light: var(--color-chrome-light);
+  --color-line-dark: var(--color-line-dark);
+  --color-line-light: var(--color-line-light);
+  --color-text-onlight: var(--color-text-onlight);
+  --color-text-onlight-dim: var(--color-text-onlight-dim);
+  --color-text-ondark: var(--color-text-ondark);
+  --color-text-ondark-dim: var(--color-text-ondark-dim);
+
+  --font-display: var(--font-big-shoulders), ui-sans-serif, sans-serif;
+  --font-body: var(--font-work-sans), ui-sans-serif, sans-serif;
+  --font-data: var(--font-ibm-plex-mono), ui-monospace, monospace;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-text-onlight);
+  font-family: var(--font-body);
+}
+
+::selection {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+.font-data {
+  font-family: var(--font-data);
+}

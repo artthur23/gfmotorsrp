@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <rect width="400" height="300" fill="#17191c"/>
+  <path d="M60 190 Q70 150 110 145 L150 120 L260 120 L300 145 Q340 150 350 190 L350 210 L60 210 Z" fill="none" stroke="#3a3d41" stroke-width="4"/>
+  <circle cx="120" cy="210" r="18" fill="none" stroke="#3a3d41" stroke-width="4"/>
+  <circle cx="290" cy="210" r="18" fill="none" stroke="#3a3d41" stroke-width="4"/>
+  <text x="200" y="255" fill="#6b6f73" font-family="sans-serif" font-size="13" text-anchor="middle">Foto em breve</text>
+</svg>

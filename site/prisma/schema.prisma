@@ -1,0 +1,135 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum VehicleStatus {
+  DISPONIVEL
+  RESERVADO
+  VENDIDO
+}
+
+enum VehicleCategory {
+  HATCH
+  SEDAN
+  SUV
+  PICAPE
+  UTILITARIO
+  CONVERSIVEL
+  ESPORTIVO
+}
+
+enum FuelType {
+  FLEX
+  GASOLINA
+  DIESEL
+  HIBRIDO
+  ELETRICO
+}
+
+enum Transmission {
+  MANUAL
+  AUTOMATICO
+  AUTOMATIZADO
+}
+
+enum LeadSource {
+  SITE
+  WHATSAPP
+  INSTAGRAM
+  TELEFONE
+  OUTRO
+}
+
+enum LeadStatus {
+  NOVO
+  EM_NEGOCIACAO
+  VENDIDO
+  PERDIDO
+}
+
+model Vehicle {
+  id           String          @id @default(cuid())
+  slug         String          @unique
+  brand        String
+  model        String
+  version      String?
+  yearFab      Int
+  yearModel    Int
+  km           Int
+  price        Int
+  fuel         FuelType
+  transmission Transmission
+  color        String?
+  category     VehicleCategory
+  description  String?
+  status       VehicleStatus   @default(DISPONIVEL)
+  featured     Boolean         @default(false)
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+
+  photos   VehiclePhoto[]
+  leads    Lead[]
+
+  @@index([status])
+  @@index([category])
+  @@index([featured])
+}
+
+model VehiclePhoto {
+  id        String  @id @default(cuid())
+  vehicleId String
+  vehicle   Vehicle @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  url       String
+  order     Int     @default(0)
+
+  @@index([vehicleId])
+}
+
+model Lead {
+  id        String     @id @default(cuid())
+  name      String
+  phone     String
+  message   String?
+  vehicleId String?
+  vehicle   Vehicle?   @relation(fields: [vehicleId], references: [id], onDelete: SetNull)
+  source    LeadSource @default(SITE)
+  status    LeadStatus @default(NOVO)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  @@index([status])
+  @@index([createdAt])
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  authorName String
+  rating    Int      @default(5)
+  text      String
+  approved  Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([approved])
+}
+
+model AdminUser {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  name         String
+  createdAt    DateTime @default(now())
+}
+
+model SiteContent {
+  key       String   @id
+  value     String
+  updatedAt DateTime @updatedAt
+}
