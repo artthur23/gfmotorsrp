@@ -178,28 +178,59 @@ export default async function HomePage() {
 
       {/* Fundador */}
       {about && (
-        <section id="fundador" className="scroll-mt-20 bg-ink text-text-ondark">
-          <div className="mx-auto grid max-w-5xl gap-10 px-5 py-16 lg:grid-cols-[.8fr_1.2fr] lg:items-center">
-            <div className="relative mx-auto aspect-3/4 w-full max-w-80 overflow-hidden border border-white/10 lg:mx-0">
+        <section id="fundador" className="scroll-mt-20 relative overflow-hidden bg-ink text-text-ondark">
+          <div
+            className="pointer-events-none absolute -left-24 top-0 h-80 w-80 rounded-full opacity-25 blur-3xl"
+            style={{ background: "#2f6b4f" }}
+          />
+          <div
+            className="pointer-events-none absolute -right-24 bottom-0 h-80 w-80 rounded-full opacity-25 blur-3xl"
+            style={{ background: "#a61e2b" }}
+          />
+
+          <div className="relative mx-auto grid max-w-5xl grid-cols-1 items-end gap-6 px-5 lg:grid-cols-[.85fr_1.15fr] lg:gap-12">
+            <div className="relative mx-auto h-105 w-full max-w-sm sm:h-125 lg:mx-0 lg:h-150">
               <Image
-                src="/team/givago-retrato.jpeg"
+                src="/team/givago-retrato-cutout.png"
                 alt="Givago Ferrari, fundador da GF Motors"
                 fill
                 quality={90}
-                sizes="(min-width: 1024px) 320px, 80vw"
-                className="object-cover"
+                sizes="(min-width: 1024px) 420px, 80vw"
+                className="object-contain object-bottom"
+                priority
               />
             </div>
-            <div className="text-center lg:text-left">
-              <p className="font-data text-xs uppercase tracking-widest text-accent">
-                Quem cuida do seu carro
+
+            <div className="pb-16 pt-10 text-center lg:pb-20 lg:pt-16 lg:text-left">
+              <p className="flex items-center justify-center gap-2 font-data text-xs uppercase tracking-widest text-accent lg:justify-start">
+                <span className="h-px w-4 bg-accent" />
+                O fundador
               </p>
-              <h2 className="mt-1 font-display text-2xl font-bold sm:text-3xl">
-                Givago Ferrari, fundador da GF Motors
+              <h2 className="mt-2 font-display text-3xl font-extrabold sm:text-4xl">
+                Givago Ferrari
               </h2>
-              <p className="mt-4 text-pretty text-base leading-relaxed text-text-ondark-dim">
-                {about}
-              </p>
+
+              <blockquote className="mx-auto mt-6 max-w-md border-l-2 border-accent pl-5 text-left lg:mx-0">
+                <p className="text-pretty text-base leading-relaxed text-text-ondark-dim">
+                  {about}
+                </p>
+              </blockquote>
+
+              <div className="mt-6 flex items-center justify-center gap-3 lg:justify-start">
+                <Image
+                  src="/logo.png"
+                  alt=""
+                  width={32}
+                  height={38}
+                  className="shrink-0"
+                />
+                <div className="text-left">
+                  <p className="font-display text-sm font-bold text-text-ondark">
+                    Givago Ferrari
+                  </p>
+                  <p className="text-xs text-text-ondark-dim">Fundador da GF Motors</p>
+                </div>
+              </div>
             </div>
           </div>
         </section>
