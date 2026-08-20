@@ -16,7 +16,7 @@ export function LeadForm({
 
   if (state.ok) {
     return (
-      <div className="border border-line-light bg-surface p-5 text-sm text-text-onlight">
+      <div className="rounded-2xl border border-line-light bg-surface p-5 text-sm text-text-onlight">
         Recebemos seus dados! Em breve alguém da GF Motors entra em contato — se preferir,
         pode chamar direto no WhatsApp.
       </div>
@@ -32,27 +32,27 @@ export function LeadForm({
           name="name"
           required
           placeholder="Seu nome"
-          className="border border-line-light bg-paper px-3 py-2 text-sm text-text-onlight placeholder:text-text-onlight-dim"
+          className="rounded-lg border border-line-light bg-paper px-3 py-2 text-sm text-text-onlight placeholder:text-text-onlight-dim"
         />
         <input
           type="tel"
           name="phone"
           required
           placeholder="Telefone / WhatsApp"
-          className="border border-line-light bg-paper px-3 py-2 text-sm text-text-onlight placeholder:text-text-onlight-dim"
+          className="rounded-lg border border-line-light bg-paper px-3 py-2 text-sm text-text-onlight placeholder:text-text-onlight-dim"
         />
       </div>
       <textarea
         name="message"
         rows={3}
         placeholder="Mensagem (opcional)"
-        className="w-full border border-line-light bg-paper px-3 py-2 text-sm text-text-onlight placeholder:text-text-onlight-dim"
+        className="w-full rounded-lg border border-line-light bg-paper px-3 py-2 text-sm text-text-onlight placeholder:text-text-onlight-dim"
       />
       {state.error && <p className="text-sm text-accent">{state.error}</p>}
       <button
         type="submit"
         disabled={pending}
-        className="bg-accent px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-accent-strong disabled:opacity-60"
+        className="rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-accent-strong disabled:opacity-60"
       >
         {pending ? "Enviando..." : "Solicitar informações"}
       </button>

@@ -47,7 +47,7 @@ export default async function VehiclePage({
 
       <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1.3fr_.9fr]">
         <div>
-          <div className="relative aspect-4/3 overflow-hidden bg-ink">
+          <div className="relative aspect-4/3 overflow-hidden rounded-2xl bg-ink">
             <Image
               src={cover}
               alt={vehicleTitle(vehicle)}
@@ -61,7 +61,7 @@ export default async function VehiclePage({
           {vehicle.photos.length > 1 && (
             <div className="mt-2 grid grid-cols-4 gap-2 sm:grid-cols-6">
               {vehicle.photos.map((p) => (
-                <div key={p.id} className="relative aspect-square overflow-hidden bg-ink">
+                <div key={p.id} className="relative aspect-square overflow-hidden rounded-lg bg-ink">
                   <Image src={p.url} alt="" fill quality={90} sizes="140px" className="object-cover" />
                 </div>
               ))}
@@ -89,7 +89,7 @@ export default async function VehiclePage({
             {formatPrice(vehicle.price)}
           </p>
 
-          <div className="mt-6 grid grid-cols-2 gap-4 border border-line-light bg-surface p-5">
+          <div className="mt-6 grid grid-cols-2 gap-4 rounded-2xl border border-line-light bg-surface p-5">
             {specs.map((s) => (
               <div key={s.label} className="flex items-start gap-2">
                 <s.icon size={16} className="mt-0.5 shrink-0 text-accent" />
@@ -107,7 +107,7 @@ export default async function VehiclePage({
             href={whatsappLink(vehicleWhatsappMessage(vehicle))}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-4 flex items-center justify-center bg-accent px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-accent-strong"
+            className="mt-4 flex items-center justify-center rounded-full bg-accent px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-accent-strong"
           >
             Falar no WhatsApp sobre esse veículo
           </a>

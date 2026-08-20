@@ -44,19 +44,19 @@ export default async function EstoquePage({
 
       <form
         method="get"
-        className="mb-10 grid grid-cols-2 gap-3 border border-line-light bg-surface p-5 sm:grid-cols-3 lg:grid-cols-6"
+        className="mb-10 grid grid-cols-2 gap-3 rounded-2xl border border-line-light bg-surface p-5 sm:grid-cols-3 lg:grid-cols-6"
       >
         <input
           type="text"
           name="q"
           defaultValue={filters.q ?? ""}
           placeholder="Buscar marca/modelo"
-          className="col-span-2 border border-line-light bg-paper px-3 py-2 text-sm lg:col-span-2"
+          className="col-span-2 rounded-lg border border-line-light bg-paper px-3 py-2 text-sm lg:col-span-2"
         />
         <select
           name="brand"
           defaultValue={filters.brand ?? ""}
-          className="border border-line-light bg-paper px-3 py-2 text-sm"
+          className="rounded-lg border border-line-light bg-paper px-3 py-2 text-sm"
         >
           <option value="">Marca</option>
           {brands.map((b) => (
@@ -68,7 +68,7 @@ export default async function EstoquePage({
         <select
           name="category"
           defaultValue={filters.category ?? ""}
-          className="border border-line-light bg-paper px-3 py-2 text-sm"
+          className="rounded-lg border border-line-light bg-paper px-3 py-2 text-sm"
         >
           <option value="">Categoria</option>
           {CATEGORY_OPTIONS.map((c) => (
@@ -82,18 +82,18 @@ export default async function EstoquePage({
           name="minPrice"
           defaultValue={filters.minPrice ?? ""}
           placeholder="Preço mín."
-          className="border border-line-light bg-paper px-3 py-2 text-sm"
+          className="rounded-lg border border-line-light bg-paper px-3 py-2 text-sm"
         />
         <input
           type="number"
           name="maxPrice"
           defaultValue={filters.maxPrice ?? ""}
           placeholder="Preço máx."
-          className="border border-line-light bg-paper px-3 py-2 text-sm"
+          className="rounded-lg border border-line-light bg-paper px-3 py-2 text-sm"
         />
         <button
           type="submit"
-          className="col-span-2 bg-accent px-4 py-2 text-sm font-semibold text-white hover:bg-accent-strong sm:col-span-1 lg:col-span-6"
+          className="col-span-2 rounded-full bg-accent px-4 py-2 text-sm font-semibold text-white hover:bg-accent-strong sm:col-span-1 lg:col-span-6"
         >
           Filtrar
         </button>

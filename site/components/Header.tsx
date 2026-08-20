@@ -51,7 +51,7 @@ export function Header() {
           href={whatsappLink("Olá! Vim pelo site da GF Motors e gostaria de mais informações.")}
           target="_blank"
           rel="noopener noreferrer"
-          className="hidden items-center gap-2 bg-accent px-4 py-2 font-data text-xs font-medium tracking-wide text-white transition-colors hover:bg-accent-strong lg:flex"
+          className="hidden items-center gap-2 rounded-full bg-accent px-4 py-2 font-data text-xs font-medium tracking-wide text-white transition-colors hover:bg-accent-strong lg:flex"
         >
           WhatsApp
         </a>
@@ -83,7 +83,7 @@ export function Header() {
               href={whatsappLink("Olá! Vim pelo site da GF Motors e gostaria de mais informações.")}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-3 flex items-center justify-center bg-accent px-4 py-3 font-data text-xs font-medium tracking-wide text-white"
+              className="mt-3 flex items-center justify-center rounded-full bg-accent px-4 py-3 font-data text-xs font-medium tracking-wide text-white"
             >
               Falar no WhatsApp
             </a>

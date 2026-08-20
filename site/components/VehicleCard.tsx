@@ -32,7 +32,7 @@ export function VehicleCard({ vehicle }: { vehicle: VehicleCardData }) {
   return (
     <Link
       href={`/estoque/${vehicle.slug}`}
-      className="group block overflow-hidden border border-line-light bg-surface transition-shadow hover:shadow-lg"
+      className="group block overflow-hidden rounded-2xl border border-line-light bg-surface transition-shadow hover:shadow-xl"
     >
       <div className="relative aspect-4/3 overflow-hidden bg-ink">
         <Image
@@ -43,11 +43,11 @@ export function VehicleCard({ vehicle }: { vehicle: VehicleCardData }) {
           sizes="(min-width: 1024px) 380px, (min-width: 640px) 47vw, 94vw"
           className="object-cover transition-transform duration-300 group-hover:scale-105"
         />
-        <span className="absolute left-3 top-3 bg-ink/85 px-2 py-1 font-data text-[11px] text-text-ondark">
+        <span className="absolute left-3 top-3 rounded-full bg-ink/85 px-3 py-1 font-data text-[11px] text-text-ondark">
           {vehicle.yearFab}/{vehicle.yearModel}
         </span>
         {(sold || reserved) && (
-          <span className="absolute right-3 top-3 bg-accent px-2 py-1 font-data text-[11px] uppercase tracking-wide text-white">
+          <span className="absolute right-3 top-3 rounded-full bg-accent px-3 py-1 font-data text-[11px] uppercase tracking-wide text-white">
             {sold ? "Vendido" : "Reservado"}
           </span>
         )}

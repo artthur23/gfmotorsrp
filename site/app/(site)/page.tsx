@@ -2,7 +2,6 @@ import Image from "next/image";
 import { AtSign, Clock, MapPin, MessageCircle, Phone, ShieldCheck, Star, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/Button";
 import { VehicleCard } from "@/components/VehicleCard";
-import { ShieldBadge } from "@/components/ShieldBadge";
 import {
   getApprovedTestimonials,
   getDifferentials,
@@ -34,7 +33,7 @@ export default async function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden bg-ink text-text-ondark">
+      <section className="relative flex min-h-screen flex-col overflow-hidden bg-ink text-text-ondark">
         <div
           className="pointer-events-none absolute inset-0"
           style={{
@@ -42,7 +41,7 @@ export default async function HomePage() {
               "radial-gradient(ellipse 120% 90% at 78% 15%, rgba(166,30,43,.22), transparent 60%)",
           }}
         />
-        <div className="relative mx-auto grid max-w-6xl gap-10 px-5 py-20 lg:grid-cols-[1.1fr_.9fr] lg:items-center lg:py-28">
+        <div className="relative mx-auto grid max-w-6xl flex-1 items-center gap-10 px-5 py-16 lg:grid-cols-[1.1fr_.9fr]">
           <div>
             <p className="font-data text-xs uppercase tracking-[0.2em] text-accent">
               Seminovos &amp; importados · Ribeirão Preto
@@ -70,7 +69,7 @@ export default async function HomePage() {
           </div>
 
           {featured[0] && (
-            <div className="relative aspect-4/3 overflow-hidden border border-white/10 bg-ink-soft">
+            <div className="relative aspect-4/3 overflow-hidden rounded-3xl border border-white/10 bg-ink-soft shadow-2xl">
               <Image
                 src={featured[0].photos[0]?.url ?? "/vehicle-placeholder.svg"}
                 alt={`${featured[0].brand} ${featured[0].model}`}
@@ -80,7 +79,7 @@ export default async function HomePage() {
                 className="object-cover"
                 priority
               />
-              <span className="absolute bottom-3 left-3 bg-ink/85 px-3 py-1.5 font-data text-xs text-text-ondark">
+              <span className="absolute bottom-4 left-4 rounded-full bg-ink/85 px-4 py-2 font-data text-xs text-text-ondark">
                 {featured[0].brand} {featured[0].model} · {featured[0].yearModel}
               </span>
             </div>
@@ -89,11 +88,15 @@ export default async function HomePage() {
 
         {/* Trust strip */}
         {differentials.length > 0 && (
-          <div className="relative border-t border-white/10 bg-ink-soft">
-            <div className="mx-auto flex max-w-6xl flex-wrap divide-y divide-white/10 sm:flex-nowrap sm:divide-y-0 sm:divide-x">
+          <div className="relative mx-auto w-full max-w-6xl px-5 pb-10">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-3 lg:grid-cols-4">
               {differentials.map((d) => (
-                <div key={d.titulo} className="w-full px-6 py-5 sm:w-auto sm:flex-1">
-                  <ShieldBadge label={d.texto} value={d.titulo} size="sm" />
+                <div
+                  key={d.titulo}
+                  className="rounded-2xl border border-white/10 bg-ink-soft px-5 py-4"
+                >
+                  <p className="font-display text-sm font-bold text-text-ondark">{d.titulo}</p>
+                  <p className="mt-0.5 text-xs text-text-ondark-dim">{d.texto}</p>
                 </div>
               ))}
             </div>
@@ -103,40 +106,42 @@ export default async function HomePage() {
 
       {/* Destaques */}
       {featured.length > 0 && (
-        <section className="mx-auto max-w-6xl px-5 py-16">
-          <div className="mb-8 flex items-end justify-between">
-            <div>
-              <p className="font-data text-xs uppercase tracking-widest text-accent">Destaques</p>
-              <h2 className="mt-1 font-display text-2xl font-bold text-text-onlight sm:text-3xl">
-                Os mais desejados
-              </h2>
+        <section className="flex min-h-screen flex-col justify-center px-5 py-16">
+          <div className="mx-auto w-full max-w-6xl">
+            <div className="mb-8 flex items-end justify-between">
+              <div>
+                <p className="font-data text-xs uppercase tracking-widest text-accent">Destaques</p>
+                <h2 className="mt-1 font-display text-2xl font-bold text-text-onlight sm:text-3xl">
+                  Os mais desejados
+                </h2>
+              </div>
+              <Button variant="outline" href="/estoque" className="hidden sm:inline-flex">
+                Ver todos ({vehicleCount})
+              </Button>
             </div>
-            <Button variant="outline" href="/estoque" className="hidden sm:inline-flex">
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+              {featured.map((v) => (
+                <VehicleCard key={v.slug} vehicle={v} />
+              ))}
+            </div>
+            <Button variant="outline" href="/estoque" className="mt-6 flex sm:hidden">
               Ver todos ({vehicleCount})
             </Button>
           </div>
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {featured.map((v) => (
-              <VehicleCard key={v.slug} vehicle={v} />
-            ))}
-          </div>
-          <Button variant="outline" href="/estoque" className="mt-6 flex sm:hidden">
-            Ver todos ({vehicleCount})
-          </Button>
         </section>
       )}
 
       {/* Diferenciais */}
       {differentials.length > 0 && (
-        <section id="diferenciais" className="scroll-mt-20 bg-ink text-text-ondark">
-          <div className="mx-auto max-w-6xl px-5 py-16">
+        <section id="diferenciais" className="scroll-mt-20 flex min-h-screen flex-col justify-center bg-ink text-text-ondark">
+          <div className="mx-auto w-full max-w-6xl px-5 py-16">
             <p className="font-data text-xs uppercase tracking-widest text-accent">Diferenciais</p>
             <h2 className="mt-1 mb-10 font-display text-2xl font-bold sm:text-3xl">
               Por que comprar na GF Motors?
             </h2>
-            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
               {differentials.map((d) => (
-                <div key={d.titulo}>
+                <div key={d.titulo} className="rounded-2xl border border-white/10 bg-ink-soft p-6">
                   <ShieldCheck className="mb-3 text-accent" size={22} />
                   <h3 className="font-display text-base font-bold">{d.titulo}</h3>
                   <p className="mt-1 text-sm text-text-ondark-dim">{d.texto}</p>
@@ -148,37 +153,42 @@ export default async function HomePage() {
       )}
 
       {/* Financiamento */}
-      <section id="financiamento" className="scroll-mt-20 bg-surface py-16">
-        <div className="mx-auto max-w-4xl px-5">
-          <p className="font-data text-xs uppercase tracking-widest text-accent">Financiamento</p>
-          <h2 className="mt-1 font-display text-2xl font-bold text-text-onlight sm:text-3xl">
-            Realize o sonho do seu carro novo.
-          </h2>
-          <p className="mt-3 max-w-xl text-sm text-text-onlight-dim">
-            Cuidamos de toda a parte de financiamento pra você sair de carro no mesmo dia.
-          </p>
-          <ul className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
-            {FINANCING_POINTS.map((p) => (
-              <li key={p} className="flex items-start gap-2 text-sm text-text-onlight">
-                <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-accent" />
-                {p}
-              </li>
-            ))}
-          </ul>
-          <Button
-            href={whatsappLink("Olá! Gostaria de simular um financiamento com a GF Motors.")}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-6"
-          >
-            Simular financiamento
-          </Button>
+      <section id="financiamento" className="scroll-mt-20 flex min-h-screen flex-col justify-center bg-surface py-16">
+        <div className="mx-auto w-full max-w-4xl px-5">
+          <div className="rounded-3xl border border-line-light bg-ink p-10 text-text-ondark shadow-xl sm:p-14">
+            <p className="font-data text-xs uppercase tracking-widest text-accent">Financiamento</p>
+            <h2 className="mt-1 font-display text-2xl font-bold sm:text-3xl">
+              Realize o sonho do seu carro novo.
+            </h2>
+            <p className="mt-3 max-w-xl text-sm text-text-ondark-dim">
+              Cuidamos de toda a parte de financiamento pra você sair de carro no mesmo dia.
+            </p>
+            <ul className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
+              {FINANCING_POINTS.map((p) => (
+                <li
+                  key={p}
+                  className="flex items-start gap-2 rounded-xl bg-ink-soft p-3 text-sm text-text-ondark"
+                >
+                  <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-accent" />
+                  {p}
+                </li>
+              ))}
+            </ul>
+            <Button
+              href={whatsappLink("Olá! Gostaria de simular um financiamento com a GF Motors.")}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6"
+            >
+              Simular financiamento
+            </Button>
+          </div>
         </div>
       </section>
 
       {/* Fundador */}
       {about && (
-        <section id="fundador" className="scroll-mt-20 relative overflow-hidden bg-ink text-text-ondark">
+        <section id="fundador" className="scroll-mt-20 relative flex min-h-screen flex-col justify-center overflow-hidden bg-ink text-text-ondark">
           <div
             className="pointer-events-none absolute -left-24 top-0 h-80 w-80 rounded-full opacity-25 blur-3xl"
             style={{ background: "#2f6b4f" }}
@@ -188,7 +198,7 @@ export default async function HomePage() {
             style={{ background: "#a61e2b" }}
           />
 
-          <div className="relative mx-auto grid max-w-5xl grid-cols-1 items-end gap-6 px-5 lg:grid-cols-[.85fr_1.15fr] lg:gap-12">
+          <div className="relative mx-auto grid w-full max-w-5xl grid-cols-1 items-end gap-6 px-5 py-16 lg:grid-cols-[.85fr_1.15fr] lg:gap-12">
             <div className="relative mx-auto w-full max-w-70 sm:max-w-80 lg:mx-0 lg:max-w-96">
               <div className="relative aspect-629/1024 w-full">
                 <Image
@@ -208,7 +218,7 @@ export default async function HomePage() {
               </div>
             </div>
 
-            <div className="pb-16 pt-10 text-center lg:pb-20 lg:pt-16 lg:text-left">
+            <div className="rounded-3xl border border-white/10 bg-ink-soft p-8 text-center sm:p-10 lg:text-left">
               <p className="flex items-center justify-center gap-2 font-data text-xs uppercase tracking-widest text-accent lg:justify-start">
                 <span className="h-px w-4 bg-accent" />
                 O fundador
@@ -245,23 +255,26 @@ export default async function HomePage() {
 
       {/* Prova social */}
       {testimonials.length > 0 && (
-        <section className="bg-surface py-16">
-          <div className="mx-auto max-w-6xl px-5">
+        <section className="flex min-h-screen flex-col justify-center bg-surface py-16">
+          <div className="mx-auto w-full max-w-6xl px-5">
             <h2 className="mb-8 font-display text-2xl font-bold text-text-onlight sm:text-3xl">
               O que nossos clientes dizem
             </h2>
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {testimonials.map((t) => (
-                <div key={t.id} className="border border-line-light p-5">
+                <div
+                  key={t.id}
+                  className="rounded-2xl border border-line-light bg-ink p-6 text-text-ondark shadow-sm"
+                >
                   <div className="mb-2 flex gap-0.5 text-accent">
                     {Array.from({ length: t.rating }).map((_, i) => (
                       <Star key={i} size={14} fill="currentColor" />
                     ))}
                   </div>
-                  <p className="text-sm leading-relaxed text-text-onlight-dim">
+                  <p className="text-sm leading-relaxed text-text-ondark-dim">
                     &ldquo;{t.text}&rdquo;
                   </p>
-                  <p className="mt-3 font-display text-sm font-bold text-text-onlight">
+                  <p className="mt-3 font-display text-sm font-bold text-text-ondark">
                     — {t.authorName}
                   </p>
                 </div>
@@ -272,9 +285,9 @@ export default async function HomePage() {
       )}
 
       {/* Localização + Contato */}
-      <section id="contato" className="scroll-mt-20 bg-ink py-16 text-text-ondark">
-        <div id="localizacao" className="scroll-mt-20 mx-auto max-w-6xl px-5">
-          <div className="grid grid-cols-1 border border-white/10 lg:grid-cols-[.85fr_1.15fr]">
+      <section id="contato" className="scroll-mt-20 flex min-h-screen flex-col justify-center bg-ink py-16 text-text-ondark">
+        <div id="localizacao" className="scroll-mt-20 mx-auto w-full max-w-6xl px-5">
+          <div className="grid grid-cols-1 overflow-hidden rounded-3xl border border-white/10 shadow-2xl lg:grid-cols-[.85fr_1.15fr]">
             <div className="bg-ink-soft p-8 lg:p-12">
               <p className="flex items-center gap-2 font-data text-xs uppercase tracking-widest text-accent">
                 <span className="h-px w-4 bg-accent" />
@@ -293,7 +306,7 @@ export default async function HomePage() {
                   href={whatsappLink("Olá! Vim pelo site da GF Motors e gostaria de mais informações.")}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-[#25D366] px-6 py-3 text-sm font-semibold text-[#0b1c12] transition-colors hover:bg-[#1fbd5a]"
+                  className="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-6 py-3 text-sm font-semibold text-[#0b1c12] transition-colors hover:bg-[#1fbd5a]"
                 >
                   <MessageCircle size={17} /> Falar no WhatsApp
                 </a>
@@ -301,7 +314,7 @@ export default async function HomePage() {
                   href="https://www.instagram.com/gfmotorsrp/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 border border-white/25 px-6 py-3 text-sm font-semibold text-text-ondark transition-colors hover:bg-white/10"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/25 px-6 py-3 text-sm font-semibold text-text-ondark transition-colors hover:bg-white/10"
                 >
                   <AtSign size={17} /> Instagram
                 </a>
