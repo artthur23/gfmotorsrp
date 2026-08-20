@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Clock, MapPin, Phone, ShieldCheck, Star, CheckCircle2 } from "lucide-react";
+import { AtSign, Clock, MapPin, MessageCircle, Phone, ShieldCheck, Star, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/Button";
 import { VehicleCard } from "@/components/VehicleCard";
 import { ShieldBadge } from "@/components/ShieldBadge";
@@ -233,88 +233,94 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* Localização */}
-      <section id="localizacao" className="scroll-mt-20 mx-auto max-w-6xl px-5 py-16">
-        <p className="font-data text-xs uppercase tracking-widest text-accent">Localização</p>
-        <h2 className="mt-1 font-display text-2xl font-bold text-text-onlight sm:text-3xl">
-          Venha nos visitar
-        </h2>
+      {/* Localização + Contato */}
+      <section id="contato" className="scroll-mt-20 bg-ink py-16 text-text-ondark">
+        <div id="localizacao" className="scroll-mt-20 mx-auto max-w-6xl px-5">
+          <div className="grid grid-cols-1 border border-white/10 lg:grid-cols-[.85fr_1.15fr]">
+            <div className="bg-ink-soft p-8 lg:p-12">
+              <p className="flex items-center gap-2 font-data text-xs uppercase tracking-widest text-accent">
+                <span className="h-px w-4 bg-accent" />
+                Vamos conversar
+              </p>
+              <h2 className="mt-3 font-display text-3xl font-extrabold leading-[1.05] sm:text-4xl">
+                Vamos achar o <span className="text-accent">seu carro</span>?
+              </h2>
+              <p className="mt-4 text-sm text-text-ondark-dim">
+                Chama no WhatsApp e fala com o time. A gente te mostra o estoque atualizado,
+                avalia seu usado e tira todas as suas dúvidas na hora.
+              </p>
 
-        <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-[1fr_1.2fr]">
-          <div className="space-y-6">
-            <div className="flex items-start gap-3">
-              <MapPin size={20} className="mt-0.5 shrink-0 text-accent" />
-              <div>
-                <p className="font-display text-base font-bold text-text-onlight">Endereço</p>
-                <p className="text-sm text-text-onlight-dim">
-                  {ADDRESS}
-                  <br />
-                  CEP 14025-310
-                </p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <a
+                  href={whatsappLink("Olá! Vim pelo site da GF Motors e gostaria de mais informações.")}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-[#25D366] px-6 py-3 text-sm font-semibold text-[#0b1c12] transition-colors hover:bg-[#1fbd5a]"
+                >
+                  <MessageCircle size={17} /> Falar no WhatsApp
+                </a>
+                <a
+                  href="https://www.instagram.com/gfmotorsrp/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 border border-white/25 px-6 py-3 text-sm font-semibold text-text-ondark transition-colors hover:bg-white/10"
+                >
+                  <AtSign size={17} /> Instagram
+                </a>
+              </div>
+
+              <div className="mt-8 space-y-5 border-t border-white/10 pt-6">
+                <div className="flex items-start gap-3">
+                  <MapPin size={18} className="mt-0.5 shrink-0 text-accent" />
+                  <div>
+                    <p className="text-[11px] uppercase tracking-wide text-text-ondark-dim">
+                      Endereço
+                    </p>
+                    <p className="text-sm font-medium text-text-ondark">
+                      {ADDRESS}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <Phone size={18} className="mt-0.5 shrink-0 text-accent" />
+                  <div>
+                    <p className="text-[11px] uppercase tracking-wide text-text-ondark-dim">
+                      Telefone / WhatsApp
+                    </p>
+                    <p className="text-sm font-medium text-text-ondark">(16) 99765-0050</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <Clock size={18} className="mt-0.5 shrink-0 text-accent" />
+                  <div>
+                    <p className="text-[11px] uppercase tracking-wide text-text-ondark-dim">
+                      Horário
+                    </p>
+                    <p className="text-sm font-medium text-text-ondark">
+                      Segunda a Sexta, 8h às 18h
+                      <br />
+                      Sábado, 8h às 13h
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
-            <div className="flex items-start gap-3">
-              <Phone size={20} className="mt-0.5 shrink-0 text-accent" />
-              <div>
-                <p className="font-display text-base font-bold text-text-onlight">Telefone</p>
-                <p className="text-sm text-text-onlight-dim">(16) 99765-0050</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <Clock size={20} className="mt-0.5 shrink-0 text-accent" />
-              <div>
-                <p className="font-display text-base font-bold text-text-onlight">Horário</p>
-                <p className="text-sm text-text-onlight-dim">
-                  Segunda a sexta: 8h às 18h
-                  <br />
-                  Sábado: 8h às 13h
-                </p>
-              </div>
+
+            <div className="min-h-80 lg:min-h-0">
+              <iframe
+                title="Localização da GF Motors"
+                src={`https://www.google.com/maps?q=${encodeURIComponent(ADDRESS)}&output=embed`}
+                className="h-full w-full"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
             </div>
           </div>
 
-          <div className="aspect-4/3 overflow-hidden border border-line-light lg:aspect-auto">
-            <iframe
-              title="Localização da GF Motors"
-              src={`https://www.google.com/maps?q=${encodeURIComponent(ADDRESS)}&output=embed`}
-              className="h-full min-h-80 w-full"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* Contato */}
-      <section id="contato" className="scroll-mt-20 bg-ink text-text-ondark">
-        <div className="mx-auto max-w-2xl px-5 py-16">
-          <p className="font-data text-xs uppercase tracking-widest text-accent">Contato</p>
-          <h2 className="mt-1 font-display text-2xl font-bold sm:text-3xl">
-            Vamos achar o seu carro?
-          </h2>
-          <p className="mt-3 text-sm text-text-ondark-dim">
-            Chama no WhatsApp e fala direto com a gente, ou deixe seus dados abaixo.
-          </p>
-
-          <div className="mt-6 flex flex-wrap gap-3">
-            <Button
-              href={whatsappLink("Olá! Vim pelo site da GF Motors e gostaria de mais informações.")}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Falar no WhatsApp
-            </Button>
-            <Button
-              variant="ghost"
-              href="https://www.instagram.com/gfmotorsrp/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Instagram
-            </Button>
-          </div>
-
-          <div className="mt-8 border border-white/10 bg-ink-soft p-6">
+          <div className="mt-6 border border-white/10 bg-ink-soft p-6">
+            <p className="mb-4 text-sm text-text-ondark-dim">
+              Prefere que a gente te retorne? Deixa seus dados aqui.
+            </p>
             <LeadForm />
           </div>
         </div>
