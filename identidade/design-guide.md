@@ -8,38 +8,46 @@
 
 ## Cores
 
-- **Fundo principal:**
+- **Fundo principal:** #0E0F11 (chumbo, quase preto — herdado do gradiente do site antigo)
 
-- **Cor de destaque / CTA:**
+- **Cor de destaque / CTA:** #A61E2B (vermelho, vindo do friso do escudo)
 
-- **Texto principal:**
+- **Texto principal:** #F2F1EE sobre fundo escuro / #14161A sobre fundo claro
 
-- **Fundo alternativo / cards:**
+- **Fundo alternativo / cards:** #F1F2F2 (névoa, fundo claro) e #FFFFFF (branco, cards/superfícies)
 
-- **Cor proibida:**
+- **Cor proibida:** nenhuma definida até o momento
+
+- **Metal / cromado (detalhes, divisórias):** #9AA0A5
+
+- **Verde tricolor (uso raro, easter egg do escudo):** #2F6B4F
 
 ---
 
 ## Tipografia
 
-- **Títulos e destaques:**
+- **Títulos e destaques:** Big Shoulders Display
 
-- **Corpo, subtítulos e botões:**
+- **Corpo, subtítulos e botões:** Work Sans
 
-- **Peso do título:**
+- **Dados/specs (preço, km, filtros):** IBM Plex Mono
+
+- **Peso do título:** extrabold (800)
 
 ---
 
 ## Estilo geral
 
+Automotivo premium, moderno — não "quadrado". Seções ocupam a tela cheia (min-height da viewport) ao rolar a home, como referência de sites como Belloni Motors.
+
 ---
 
 ## Elementos-chave
 
-- Bordas:
-- Border-radius dos cards:
-- Botões:
-- Sombras:
+- Bordas: sutis, border-line-light/border-line-dark (baixo contraste)
+- Border-radius dos cards: rounded-2xl / rounded-3xl em cards e imagens
+- Botões: rounded-full (pílula)
+- Sombras: discretas, shadow-lg/shadow-xl em cards e imagens de destaque
 
 ---
 
@@ -49,11 +57,14 @@
 
 ## Logo
 
-- **Arquivo:** *(ex: identidade/logo.png ou identidade/logo.svg)*
-- **Versão pra fundo escuro:** *(se tiver — ex: identidade/logo-branco.png)*
-- **Onde usar:** slide final do carrossel (CTA), header de propostas, slides de apresentação
-- **Tamanho sugerido:** largura entre 120-200px nos HTMLs
+- **Arquivo:** identidade/logo.png (escudo cromado com friso tricolor verde-branco-vermelho)
+- **Versão pra fundo escuro:** o mesmo logo.png já funciona sobre fundo escuro (fundo do próprio arquivo é transparente/escuro)
+- **Onde usar:** header, footer, seção "Fundador" do site, slide final de carrossel, header de propostas
+- **Tamanho sugerido:** largura entre 120-200px nos HTMLs (site usa ~40-140px dependendo da seção)
+- **Fotos da equipe:** identidade/equipe/givago-retrato.jpeg (retrato do fundador) e identidade/equipe/givago-fachada.png (fachada da loja). Versão do retrato sem fundo (recortada) fica em site/public/team/givago-retrato-cutout.png.
 
 ---
 
 ## Observações adicionais
+
+O friso tricolor no topo do escudo (verde-branco-vermelho) é uma referência à bandeira da Itália e ao sobrenome do fundador, Givago **Ferrari** — funciona como um easter egg de marca. Vira motivo reaproveitável em detalhes (ex: 3 barrinhas coloridas na seção "Fundador" do site).
