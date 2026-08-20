@@ -9,10 +9,29 @@ import type { Differential } from "@/lib/queries";
 
 const ICONS: LucideIcon[] = [ShieldCheck, CreditCard, MessageCircle, Globe2];
 
+function Track({ items }: { items: Differential[] }) {
+  return (
+    <div className="flex min-w-screen shrink-0 items-center justify-around gap-8 px-4" aria-hidden>
+      {items.map((d, i) => {
+        const Icon = ICONS[i % ICONS.length];
+        return (
+          <div key={d.titulo} className="flex shrink-0 items-center gap-3">
+            <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-accent/15 text-accent">
+              <Icon size={17} />
+            </span>
+            <span className="whitespace-nowrap font-display text-sm font-bold text-text-ondark">
+              {d.titulo}
+            </span>
+            <span className="text-accent">•</span>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 export function DifferentialsMarquee({ items }: { items: Differential[] }) {
   if (items.length === 0) return null;
-
-  const track = [...items, ...items];
 
   return (
     <div
@@ -24,21 +43,9 @@ export function DifferentialsMarquee({ items }: { items: Differential[] }) {
           "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
       }}
     >
-      <div className="flex w-max animate-marquee items-center gap-8">
-        {track.map((d, i) => {
-          const Icon = ICONS[i % items.length % ICONS.length];
-          return (
-            <div key={`${d.titulo}-${i}`} className="flex shrink-0 items-center gap-3">
-              <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-accent/15 text-accent">
-                <Icon size={17} />
-              </span>
-              <span className="whitespace-nowrap font-display text-sm font-bold text-text-ondark">
-                {d.titulo}
-              </span>
-              <span className="text-accent">•</span>
-            </div>
-          );
-        })}
+      <div className="flex w-max animate-marquee items-center">
+        <Track items={items} />
+        <Track items={items} />
       </div>
     </div>
   );
