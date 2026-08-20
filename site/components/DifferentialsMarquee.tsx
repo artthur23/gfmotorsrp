@@ -9,18 +9,24 @@ import type { Differential } from "@/lib/queries";
 
 const ICONS: LucideIcon[] = [ShieldCheck, CreditCard, MessageCircle, Globe2];
 
+// Repeated enough times so a single track's natural width comfortably
+// exceeds any realistic viewport, even with just 1-2 differentials.
+const REPEAT = 8;
+
 function Track({ items }: { items: Differential[] }) {
+  const repeated = Array.from({ length: REPEAT }, () => items).flat();
+
   return (
-    <div className="flex min-w-screen shrink-0 items-center justify-around gap-8 px-4" aria-hidden>
-      {items.map((d, i) => {
+    <div className="flex shrink-0 items-center gap-10 px-5" aria-hidden>
+      {repeated.map((d, i) => {
         const Icon = ICONS[i % ICONS.length];
         return (
-          <div key={d.titulo} className="flex shrink-0 items-center gap-3">
+          <div key={`${d.titulo}-${i}`} className="flex shrink-0 items-center gap-2.5">
             <span
-              className="flex size-10 shrink-0 items-center justify-center rounded-lg border border-accent bg-ink text-accent"
-              style={{ boxShadow: "0 0 14px 1px rgba(166,30,43,.55)" }}
+              className="flex size-9 shrink-0 items-center justify-center rounded-md border border-accent bg-accent/25 text-accent"
+              style={{ boxShadow: "0 0 12px 1px rgba(166,30,43,.6)" }}
             >
-              <Icon size={19} />
+              <Icon size={18} />
             </span>
             <span className="whitespace-nowrap font-display text-base font-bold text-text-ondark">
               {d.titulo}
