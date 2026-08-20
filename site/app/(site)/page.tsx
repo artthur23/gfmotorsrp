@@ -2,6 +2,7 @@ import Image from "next/image";
 import { AtSign, Clock, MapPin, MessageCircle, Phone, ShieldCheck, Star, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/Button";
 import { VehicleCard } from "@/components/VehicleCard";
+import { DifferentialsMarquee } from "@/components/DifferentialsMarquee";
 import {
   getApprovedTestimonials,
   getDifferentials,
@@ -87,21 +88,9 @@ export default async function HomePage() {
         </div>
 
         {/* Trust strip */}
-        {differentials.length > 0 && (
-          <div className="relative mx-auto w-full max-w-6xl px-5 pb-10">
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-              {differentials.map((d) => (
-                <div
-                  key={d.titulo}
-                  className="rounded-2xl border border-white/10 bg-ink-soft px-5 py-4"
-                >
-                  <p className="font-display text-sm font-bold text-text-ondark">{d.titulo}</p>
-                  <p className="mt-0.5 text-xs text-text-ondark-dim">{d.texto}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
+        <div className="relative border-t border-white/10 bg-ink-soft">
+          <DifferentialsMarquee items={differentials} />
+        </div>
       </section>
 
       {/* Destaques */}
