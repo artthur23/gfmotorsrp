@@ -65,7 +65,8 @@ export default async function HomePage() {
                 src={featured[0].photos[0]?.url ?? "/vehicle-placeholder.svg"}
                 alt={`${featured[0].brand} ${featured[0].model}`}
                 fill
-                sizes="(min-width: 1024px) 480px, 90vw"
+                quality={90}
+                sizes="(min-width: 1024px) 500px, 90vw"
                 className="object-cover"
                 priority
               />

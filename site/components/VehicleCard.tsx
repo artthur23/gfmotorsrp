@@ -39,7 +39,8 @@ export function VehicleCard({ vehicle }: { vehicle: VehicleCardData }) {
           src={cover}
           alt={vehicleTitle(vehicle)}
           fill
-          sizes="(min-width: 1024px) 320px, (min-width: 640px) 45vw, 90vw"
+          quality={90}
+          sizes="(min-width: 1024px) 380px, (min-width: 640px) 47vw, 94vw"
           className="object-cover transition-transform duration-300 group-hover:scale-105"
         />
         <span className="absolute left-3 top-3 bg-ink/85 px-2 py-1 font-data text-[11px] text-text-ondark">

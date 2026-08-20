@@ -48,13 +48,21 @@ export default async function VehiclePage({
       <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1.3fr_.9fr]">
         <div>
           <div className="relative aspect-4/3 overflow-hidden bg-ink">
-            <Image src={cover} alt={vehicleTitle(vehicle)} fill className="object-cover" priority />
+            <Image
+              src={cover}
+              alt={vehicleTitle(vehicle)}
+              fill
+              quality={90}
+              sizes="(min-width: 1024px) 660px, 100vw"
+              className="object-cover"
+              priority
+            />
           </div>
           {vehicle.photos.length > 1 && (
             <div className="mt-2 grid grid-cols-4 gap-2 sm:grid-cols-6">
               {vehicle.photos.map((p) => (
                 <div key={p.id} className="relative aspect-square overflow-hidden bg-ink">
-                  <Image src={p.url} alt="" fill className="object-cover" />
+                  <Image src={p.url} alt="" fill quality={90} sizes="140px" className="object-cover" />
                 </div>
               ))}
             </div>
