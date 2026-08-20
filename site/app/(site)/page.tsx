@@ -189,16 +189,22 @@ export default async function HomePage() {
           />
 
           <div className="relative mx-auto grid max-w-5xl grid-cols-1 items-end gap-6 px-5 lg:grid-cols-[.85fr_1.15fr] lg:gap-12">
-            <div className="relative mx-auto h-105 w-full max-w-sm sm:h-125 lg:mx-0 lg:h-150">
-              <Image
-                src="/team/givago-retrato-cutout.png"
-                alt="Givago Ferrari, fundador da GF Motors"
-                fill
-                quality={90}
-                sizes="(min-width: 1024px) 420px, 80vw"
-                className="object-contain object-bottom"
-                priority
-              />
+            <div className="mx-auto w-full max-w-sm lg:mx-0">
+              <div className="relative h-105 w-full sm:h-125 lg:h-150">
+                <Image
+                  src="/team/givago-retrato-cutout.png"
+                  alt="Givago Ferrari, fundador da GF Motors"
+                  fill
+                  quality={90}
+                  sizes="(min-width: 1024px) 420px, 80vw"
+                  className="object-contain object-bottom"
+                  priority
+                />
+              </div>
+              <div className="mt-3 flex gap-2">
+                <span className="h-1 flex-1 rounded-full" style={{ background: "#2f6b4f" }} />
+                <span className="h-1 flex-1 rounded-full bg-accent" />
+              </div>
             </div>
 
             <div className="pb-16 pt-10 text-center lg:pb-20 lg:pt-16 lg:text-left">
