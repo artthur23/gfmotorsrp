@@ -66,7 +66,7 @@ body {
 }
 
 .animate-marquee {
-  animation: marquee 80s linear infinite;
+  animation: marquee 114s linear infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
