@@ -180,14 +180,15 @@ export default async function HomePage() {
       {/* Fundador */}
       {about && (
         <section id="fundador" className="scroll-mt-20 bg-ink text-text-ondark">
-          <div className="mx-auto grid max-w-5xl gap-10 px-5 py-16 lg:grid-cols-[.7fr_1.3fr] lg:items-center">
-            <div className="flex justify-center lg:justify-start">
+          <div className="mx-auto grid max-w-5xl gap-10 px-5 py-16 lg:grid-cols-[.8fr_1.2fr] lg:items-center">
+            <div className="relative mx-auto aspect-3/4 w-full max-w-80 overflow-hidden border border-white/10 lg:mx-0">
               <Image
-                src="/logo.png"
-                alt="GF Motors"
-                width={140}
-                height={166}
-                className="drop-shadow-[0_8px_24px_rgba(0,0,0,.4)]"
+                src="/team/givago-retrato.jpeg"
+                alt="Givago Ferrari, fundador da GF Motors"
+                fill
+                quality={90}
+                sizes="(min-width: 1024px) 320px, 80vw"
+                className="object-cover"
               />
             </div>
             <div className="text-center lg:text-left">
@@ -236,6 +237,21 @@ export default async function HomePage() {
       {/* Localização + Contato */}
       <section id="contato" className="scroll-mt-20 bg-ink py-16 text-text-ondark">
         <div id="localizacao" className="scroll-mt-20 mx-auto max-w-6xl px-5">
+          <div className="relative mb-6 aspect-21/9 w-full overflow-hidden border border-white/10 sm:aspect-32/9">
+            <Image
+              src="/team/givago-fachada.png"
+              alt="Fachada da GF Motors em Ribeirão Preto"
+              fill
+              quality={90}
+              sizes="(min-width: 1152px) 1112px, 100vw"
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-linear-to-t from-ink/90 via-ink/10 to-transparent" />
+            <p className="absolute bottom-4 left-4 font-data text-xs uppercase tracking-widest text-text-ondark sm:bottom-6 sm:left-6">
+              Nossa loja em Ribeirão Preto
+            </p>
+          </div>
+
           <div className="grid grid-cols-1 border border-white/10 lg:grid-cols-[.85fr_1.15fr]">
             <div className="bg-ink-soft p-8 lg:p-12">
               <p className="flex items-center gap-2 font-data text-xs uppercase tracking-widest text-accent">
