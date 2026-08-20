@@ -49,7 +49,7 @@ export default async function VehiclePage({
       </nav>
 
       <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1.3fr_.9fr]">
-        <div>
+        <div className="min-w-0">
           <VehicleGallery photos={photos} title={vehicleTitle(vehicle)} />
 
           {vehicle.description && (
@@ -62,7 +62,7 @@ export default async function VehiclePage({
           )}
         </div>
 
-        <div>
+        <div className="min-w-0">
           <p className="font-data text-xs uppercase tracking-widest text-accent">
             {categoryLabel(vehicle.category)}
           </p>
