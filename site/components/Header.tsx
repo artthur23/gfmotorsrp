@@ -10,10 +10,10 @@ import { whatsappLink } from "@/lib/format";
 const NAV_LINKS = [
   { href: "/", label: "Início" },
   { href: "/estoque", label: "Estoque" },
-  { href: "/empresa", label: "Empresa" },
-  { href: "/financiamento", label: "Financiamento" },
-  { href: "/localizacao", label: "Localização" },
-  { href: "/contato", label: "Contato" },
+  { href: "/#diferenciais", label: "Diferenciais" },
+  { href: "/#fundador", label: "Fundador" },
+  { href: "/#localizacao", label: "Localização" },
+  { href: "/#contato", label: "Contato" },
 ];
 
 export function Header() {

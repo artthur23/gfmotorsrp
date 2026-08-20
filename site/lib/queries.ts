@@ -71,6 +71,10 @@ export async function getVehicles(filters: VehicleFilters = {}) {
   });
 }
 
+export async function getVehicleCount() {
+  return prisma.vehicle.count({ where: { status: { not: "VENDIDO" } } });
+}
+
 export async function getVehicleBrands() {
   const rows = await prisma.vehicle.findMany({
     where: { status: { not: "VENDIDO" } },

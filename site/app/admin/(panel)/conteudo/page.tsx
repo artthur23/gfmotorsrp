@@ -32,6 +32,9 @@ export default async function ConteudoPage() {
         <h2 className="mb-4 font-display text-sm font-bold uppercase tracking-wide text-text-onlight">
           Sobre a empresa
         </h2>
+        <p className="mb-3 text-xs text-text-onlight-dim">
+          Esse texto aparece na seção &quot;Fundador&quot; da home (/#fundador).
+        </p>
         <form action={updateSobreEmpresa} className="space-y-3">
           <textarea
             name="sobre_empresa"

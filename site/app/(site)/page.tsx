@@ -1,24 +1,35 @@
 import Image from "next/image";
-import { MapPin, ShieldCheck, Star } from "lucide-react";
+import { Clock, MapPin, Phone, ShieldCheck, Star, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/Button";
 import { VehicleCard } from "@/components/VehicleCard";
 import { ShieldBadge } from "@/components/ShieldBadge";
+import { LeadForm } from "@/components/LeadForm";
 import {
   getApprovedTestimonials,
   getDifferentials,
   getFeaturedVehicles,
   getSiteContent,
+  getVehicleCount,
 } from "@/lib/queries";
 import { whatsappLink } from "@/lib/format";
 
 export const dynamic = "force-dynamic";
 
+const ADDRESS = "Av. Professor João Fiúsa, 945 - B. Alto da Boa Vista, Ribeirão Preto - SP";
+
+const FINANCING_POINTS = [
+  "Taxas negociadas direto com os principais bancos",
+  "Aprovação rápida, sem burocracia",
+  "Condições sob medida pro seu perfil",
+];
+
 export default async function HomePage() {
-  const [featured, differentials, about, testimonials] = await Promise.all([
+  const [featured, differentials, about, testimonials, vehicleCount] = await Promise.all([
     getFeaturedVehicles(),
     getDifferentials(),
     getSiteContent("sobre_empresa"),
     getApprovedTestimonials(),
+    getVehicleCount(),
   ]);
 
   return (
@@ -78,17 +89,17 @@ export default async function HomePage() {
         </div>
 
         {/* Trust strip */}
-        <div className="relative grid grid-cols-1 divide-y divide-white/10 border-t border-white/10 bg-ink-soft sm:grid-cols-3 sm:divide-x sm:divide-y-0">
-          <div className="px-6 py-5">
-            <ShieldBadge label="Procedência" value="100% verificada" size="sm" />
+        {differentials.length > 0 && (
+          <div className="relative border-t border-white/10 bg-ink-soft">
+            <div className="mx-auto flex max-w-6xl flex-wrap divide-y divide-white/10 sm:flex-nowrap sm:divide-y-0 sm:divide-x">
+              {differentials.map((d) => (
+                <div key={d.titulo} className="w-full px-6 py-5 sm:w-auto sm:flex-1">
+                  <ShieldBadge label={d.texto} value={d.titulo} size="sm" />
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="px-6 py-5">
-            <ShieldBadge label="Garantia" value="Estendida" size="sm" />
-          </div>
-          <div className="px-6 py-5">
-            <ShieldBadge label="Atendimento" value="Direto no WhatsApp" size="sm" />
-          </div>
-        </div>
+        )}
       </section>
 
       {/* Destaques */}
@@ -102,7 +113,7 @@ export default async function HomePage() {
               </h2>
             </div>
             <Button variant="outline" href="/estoque" className="hidden sm:inline-flex">
-              Ver todos
+              Ver todos ({vehicleCount})
             </Button>
           </div>
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -110,14 +121,18 @@ export default async function HomePage() {
               <VehicleCard key={v.slug} vehicle={v} />
             ))}
           </div>
+          <Button variant="outline" href="/estoque" className="mt-6 flex sm:hidden">
+            Ver todos ({vehicleCount})
+          </Button>
         </section>
       )}
 
       {/* Diferenciais */}
       {differentials.length > 0 && (
-        <section className="bg-ink text-text-ondark">
+        <section id="diferenciais" className="scroll-mt-20 bg-ink text-text-ondark">
           <div className="mx-auto max-w-6xl px-5 py-16">
-            <h2 className="mb-10 font-display text-2xl font-bold sm:text-3xl">
+            <p className="font-data text-xs uppercase tracking-widest text-accent">Diferenciais</p>
+            <h2 className="mt-1 mb-10 font-display text-2xl font-bold sm:text-3xl">
               Por que comprar na GF Motors?
             </h2>
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
@@ -133,18 +148,60 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* Sobre */}
-      {about && (
-        <section className="mx-auto max-w-3xl px-5 py-16 text-center">
-          <p className="font-data text-xs uppercase tracking-widest text-accent">
-            Sobre a GF Motors
+      {/* Financiamento */}
+      <section id="financiamento" className="scroll-mt-20 bg-surface py-16">
+        <div className="mx-auto max-w-4xl px-5">
+          <p className="font-data text-xs uppercase tracking-widest text-accent">Financiamento</p>
+          <h2 className="mt-1 font-display text-2xl font-bold text-text-onlight sm:text-3xl">
+            Realize o sonho do seu carro novo.
+          </h2>
+          <p className="mt-3 max-w-xl text-sm text-text-onlight-dim">
+            Cuidamos de toda a parte de financiamento pra você sair de carro no mesmo dia.
           </p>
-          <p className="mt-4 text-pretty text-base leading-relaxed text-text-onlight-dim">
-            {about}
-          </p>
-          <Button variant="outline" href="/empresa" className="mt-6">
-            Conheça nossa história
+          <ul className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
+            {FINANCING_POINTS.map((p) => (
+              <li key={p} className="flex items-start gap-2 text-sm text-text-onlight">
+                <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-accent" />
+                {p}
+              </li>
+            ))}
+          </ul>
+          <Button
+            href={whatsappLink("Olá! Gostaria de simular um financiamento com a GF Motors.")}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6"
+          >
+            Simular financiamento
           </Button>
+        </div>
+      </section>
+
+      {/* Fundador */}
+      {about && (
+        <section id="fundador" className="scroll-mt-20 bg-ink text-text-ondark">
+          <div className="mx-auto grid max-w-5xl gap-10 px-5 py-16 lg:grid-cols-[.7fr_1.3fr] lg:items-center">
+            <div className="flex justify-center lg:justify-start">
+              <Image
+                src="/logo.png"
+                alt="GF Motors"
+                width={140}
+                height={166}
+                className="drop-shadow-[0_8px_24px_rgba(0,0,0,.4)]"
+              />
+            </div>
+            <div className="text-center lg:text-left">
+              <p className="font-data text-xs uppercase tracking-widest text-accent">
+                Quem cuida do seu carro
+              </p>
+              <h2 className="mt-1 font-display text-2xl font-bold sm:text-3xl">
+                Givago Ferrari, fundador da GF Motors
+              </h2>
+              <p className="mt-4 text-pretty text-base leading-relaxed text-text-ondark-dim">
+                {about}
+              </p>
+            </div>
+          </div>
         </section>
       )}
 
@@ -177,22 +234,89 @@ export default async function HomePage() {
       )}
 
       {/* Localização */}
-      <section className="mx-auto max-w-6xl px-5 py-16">
-        <div className="flex flex-col items-start justify-between gap-6 border border-line-light bg-surface p-8 sm:flex-row sm:items-center">
-          <div className="flex items-start gap-3">
-            <MapPin className="mt-0.5 shrink-0 text-accent" size={22} />
-            <div>
-              <h2 className="font-display text-lg font-bold text-text-onlight">
-                Venha nos visitar
-              </h2>
-              <p className="text-sm text-text-onlight-dim">
-                Av. Professor João Fiúsa, 945 — B. Alto da Boa Vista, Ribeirão Preto - SP
-              </p>
+      <section id="localizacao" className="scroll-mt-20 mx-auto max-w-6xl px-5 py-16">
+        <p className="font-data text-xs uppercase tracking-widest text-accent">Localização</p>
+        <h2 className="mt-1 font-display text-2xl font-bold text-text-onlight sm:text-3xl">
+          Venha nos visitar
+        </h2>
+
+        <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-[1fr_1.2fr]">
+          <div className="space-y-6">
+            <div className="flex items-start gap-3">
+              <MapPin size={20} className="mt-0.5 shrink-0 text-accent" />
+              <div>
+                <p className="font-display text-base font-bold text-text-onlight">Endereço</p>
+                <p className="text-sm text-text-onlight-dim">
+                  {ADDRESS}
+                  <br />
+                  CEP 14025-310
+                </p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <Phone size={20} className="mt-0.5 shrink-0 text-accent" />
+              <div>
+                <p className="font-display text-base font-bold text-text-onlight">Telefone</p>
+                <p className="text-sm text-text-onlight-dim">(16) 99765-0050</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <Clock size={20} className="mt-0.5 shrink-0 text-accent" />
+              <div>
+                <p className="font-display text-base font-bold text-text-onlight">Horário</p>
+                <p className="text-sm text-text-onlight-dim">
+                  Segunda a sexta: 8h às 18h
+                  <br />
+                  Sábado: 8h às 13h
+                </p>
+              </div>
             </div>
           </div>
-          <Button href="/localizacao" variant="outline">
-            Como chegar
-          </Button>
+
+          <div className="aspect-4/3 overflow-hidden border border-line-light lg:aspect-auto">
+            <iframe
+              title="Localização da GF Motors"
+              src={`https://www.google.com/maps?q=${encodeURIComponent(ADDRESS)}&output=embed`}
+              className="h-full min-h-80 w-full"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Contato */}
+      <section id="contato" className="scroll-mt-20 bg-ink text-text-ondark">
+        <div className="mx-auto max-w-2xl px-5 py-16">
+          <p className="font-data text-xs uppercase tracking-widest text-accent">Contato</p>
+          <h2 className="mt-1 font-display text-2xl font-bold sm:text-3xl">
+            Vamos achar o seu carro?
+          </h2>
+          <p className="mt-3 text-sm text-text-ondark-dim">
+            Chama no WhatsApp e fala direto com a gente, ou deixe seus dados abaixo.
+          </p>
+
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Button
+              href={whatsappLink("Olá! Vim pelo site da GF Motors e gostaria de mais informações.")}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Falar no WhatsApp
+            </Button>
+            <Button
+              variant="ghost"
+              href="https://www.instagram.com/gfmotorsrp/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Instagram
+            </Button>
+          </div>
+
+          <div className="mt-8 border border-white/10 bg-ink-soft p-6">
+            <LeadForm />
+          </div>
         </div>
       </section>
     </>
