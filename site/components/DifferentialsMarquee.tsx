@@ -16,13 +16,13 @@ function Track({ items }: { items: Differential[] }) {
         const Icon = ICONS[i % ICONS.length];
         return (
           <div key={d.titulo} className="flex shrink-0 items-center gap-3">
-            <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-accent/15 text-accent">
-              <Icon size={17} />
+            <span className="flex size-11 shrink-0 items-center justify-center rounded-lg bg-accent/15 text-accent">
+              <Icon size={22} />
             </span>
-            <span className="whitespace-nowrap font-display text-sm font-bold text-text-ondark">
+            <span className="whitespace-nowrap font-display text-lg font-bold text-text-ondark">
               {d.titulo}
             </span>
-            <span className="text-accent">•</span>
+            <span className="text-lg text-accent">•</span>
           </div>
         );
       })}
@@ -35,7 +35,7 @@ export function DifferentialsMarquee({ items }: { items: Differential[] }) {
 
   return (
     <div
-      className="relative w-full overflow-hidden py-5"
+      className="relative w-full overflow-hidden py-6"
       style={{
         maskImage:
           "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
