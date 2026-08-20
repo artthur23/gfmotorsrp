@@ -17,21 +17,21 @@ function Track({ items }: { items: Differential[] }) {
   const repeated = Array.from({ length: REPEAT }, () => items).flat();
 
   return (
-    <div className="flex shrink-0 items-center gap-10 px-5" aria-hidden>
+    <div className="flex shrink-0 items-center gap-9 px-5" aria-hidden>
       {repeated.map((d, i) => {
         const Icon = ICONS[i % ICONS.length];
         return (
-          <div key={`${d.titulo}-${i}`} className="flex shrink-0 items-center gap-2.5">
+          <div key={`${d.titulo}-${i}`} className="flex shrink-0 items-center gap-2">
             <span
-              className="flex size-9 shrink-0 items-center justify-center rounded-md border border-accent bg-accent/25 text-accent"
+              className="flex size-8 shrink-0 items-center justify-center rounded-md border border-accent bg-accent/25 text-accent"
               style={{ boxShadow: "0 0 12px 1px rgba(166,30,43,.6)" }}
             >
-              <Icon size={18} />
+              <Icon size={16} />
             </span>
             <span className="whitespace-nowrap font-display text-base font-bold text-text-ondark">
               {d.titulo}
             </span>
-            <span className="text-base text-accent">•</span>
+            <span className="ml-1 text-base text-accent">•</span>
           </div>
         );
       })}
