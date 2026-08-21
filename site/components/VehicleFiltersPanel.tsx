@@ -169,21 +169,21 @@ export function VehicleFiltersPanel({
         onClick={() => setMobileOpen((v) => !v)}
         aria-expanded={mobileOpen}
         aria-controls="filtros-painel"
-        className="flex w-full items-center justify-between p-6 lg:pointer-events-none lg:cursor-default"
+        className="flex w-full items-center justify-between p-7 lg:pointer-events-none lg:cursor-default"
       >
-        <span className="font-display text-xl font-bold">
+        <span className="font-display text-2xl font-bold">
           Filtros{activeCount > 0 ? ` (${activeCount})` : ""}
         </span>
         <ChevronDown
-          size={18}
+          size={20}
           className={`text-text-ondark-dim transition-transform lg:hidden ${mobileOpen ? "rotate-180" : ""}`}
         />
       </button>
 
-      <div id="filtros-painel" className={`${mobileOpen ? "block" : "hidden"} px-6 pb-6 lg:block`}>
+      <div id="filtros-painel" className={`${mobileOpen ? "block" : "hidden"} px-7 pb-7 lg:block`}>
         <div className="divide-y divide-line-dark">
           <FilterSection title="Marca" defaultOpen>
-            <div className="flex max-h-48 flex-col gap-2 overflow-y-auto pr-1">
+            <div className="flex max-h-52 flex-col gap-2.5 overflow-y-auto pr-1">
               {brands.map((b) => (
                 <CheckboxRow
                   key={b}
@@ -230,7 +230,7 @@ export function VehicleFiltersPanel({
           </FilterSection>
 
           <FilterSection title="Câmbio" defaultOpen>
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2.5">
               {transmissionOptions.map((t) => (
                 <CheckboxRow
                   key={t.value}
@@ -244,7 +244,7 @@ export function VehicleFiltersPanel({
           </FilterSection>
 
           <FilterSection title="Combustível" defaultOpen>
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2.5">
               {fuelOptions.map((f) => (
                 <CheckboxRow
                   key={f.value}
@@ -258,11 +258,11 @@ export function VehicleFiltersPanel({
           </FilterSection>
         </div>
 
-        <div className="pt-5">
+        <div className="pt-6">
           <button
             type="button"
             onClick={handleApplyClick}
-            className="w-full rounded-full bg-accent px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-accent-strong disabled:opacity-70"
+            className="w-full rounded-full bg-accent px-4 py-3.5 text-base font-semibold text-white transition-colors hover:bg-accent-strong disabled:opacity-70"
             disabled={isPending}
           >
             Ver {matchingCount} veículo{matchingCount === 1 ? "" : "s"}
@@ -271,7 +271,7 @@ export function VehicleFiltersPanel({
             <button
               type="button"
               onClick={handleClear}
-              className="mt-3 block w-full text-center text-xs text-text-ondark-dim hover:text-text-ondark"
+              className="mt-4 block w-full text-center text-sm text-text-ondark-dim hover:text-text-ondark"
             >
               Limpar filtros
             </button>
@@ -292,15 +292,15 @@ function FilterSection({
   children: ReactNode;
 }) {
   return (
-    <details className="group py-4" open={defaultOpen}>
-      <summary className="flex cursor-pointer list-none items-center justify-between text-sm font-semibold">
+    <details className="group py-5" open={defaultOpen}>
+      <summary className="flex cursor-pointer list-none items-center justify-between text-base font-semibold">
         {title}
         <ChevronDown
-          size={16}
+          size={18}
           className="text-text-ondark-dim transition-transform group-open:rotate-180"
         />
       </summary>
-      <div className="mt-3">{children}</div>
+      <div className="mt-4">{children}</div>
     </details>
   );
 }
@@ -318,12 +318,12 @@ function CheckboxRow({
 }) {
   return (
     <label className="flex items-center justify-between gap-2 text-sm text-text-ondark-dim">
-      <span className="flex items-center gap-2">
+      <span className="flex items-center gap-2.5">
         <input
           type="checkbox"
           checked={checked}
           onChange={onChange}
-          className="rounded border-line-dark accent-accent"
+          className="h-4 w-4 rounded border-line-dark accent-accent"
         />
         {label}
       </span>
@@ -365,7 +365,7 @@ function RangeRow({
           background: `linear-gradient(to right, var(--color-accent) 0%, var(--color-accent) ${pct}%, var(--color-line-dark) ${pct}%, var(--color-line-dark) 100%)`,
         }}
       />
-      <p className="mt-2 text-sm font-medium text-text-ondark">{label}</p>
+      <p className="mt-3 text-sm font-medium text-text-ondark">{label}</p>
     </div>
   );
 }
