@@ -1,13 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
-import { AtSign, Clock, MapPin, MessageCircle, Phone } from "lucide-react";
+import { Clock, MapPin, Phone } from "lucide-react";
+import { WhatsAppIcon, InstagramIcon } from "@/components/icons/BrandIcons";
 import { whatsappLink } from "@/lib/format";
 
 export function Footer() {
   return (
     <footer className="border-t border-line-dark bg-ink text-text-ondark-dim">
-      <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:grid-cols-2 lg:grid-cols-3">
-        <div>
+      <div className="mx-auto flex max-w-4xl flex-col gap-10 px-5 py-14 sm:flex-row sm:flex-wrap sm:justify-between lg:flex-nowrap">
+        <div className="sm:max-w-56">
           <div className="mb-4 flex items-center gap-3">
             <Image src="/logo.png" alt="GF Motors" width={36} height={44} />
             <span className="font-display text-base font-extrabold tracking-wide text-text-ondark">
@@ -24,7 +25,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div>
+        <div className="shrink-0">
           <h3 className="mb-4 font-display text-sm font-bold uppercase tracking-wider text-text-ondark">
             Navegação
           </h3>
@@ -37,7 +38,7 @@ export function Footer() {
           </ul>
         </div>
 
-        <div>
+        <div className="sm:max-w-72">
           <h3 className="mb-4 font-display text-sm font-bold uppercase tracking-wider text-text-ondark">
             Contato
           </h3>
@@ -66,24 +67,24 @@ export function Footer() {
             </li>
           </ul>
 
-          <div className="mt-4 flex gap-2">
+          <div className="mt-4 flex gap-2.5">
             <a
               href={whatsappLink("Olá! Vim pelo site da GF Motors e gostaria de mais informações.")}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="WhatsApp"
-              className="flex size-9 items-center justify-center rounded-full border border-white/15 text-text-ondark-dim transition-colors hover:border-accent hover:text-accent"
+              className="flex size-9 items-center justify-center rounded-lg bg-white transition-transform hover:scale-105"
             >
-              <MessageCircle size={16} />
+              <WhatsAppIcon size={18} />
             </a>
             <a
               href="https://www.instagram.com/gfmotorsrp/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
-              className="flex size-9 items-center justify-center rounded-full border border-white/15 text-text-ondark-dim transition-colors hover:border-accent hover:text-accent"
+              className="flex size-9 items-center justify-center rounded-lg bg-white transition-transform hover:scale-105"
             >
-              <AtSign size={16} />
+              <InstagramIcon size={18} />
             </a>
           </div>
         </div>
