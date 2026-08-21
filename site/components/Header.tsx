@@ -12,7 +12,6 @@ const NAV_LINKS = [
   { href: "/estoque", label: "Nossos carros" },
   { href: "/#diferenciais", label: "Diferenciais" },
   { href: "/#fundador", label: "Fundador" },
-  { href: "/#localizacao", label: "Localização" },
   { href: "/#contato", label: "Contato" },
 ];
 
