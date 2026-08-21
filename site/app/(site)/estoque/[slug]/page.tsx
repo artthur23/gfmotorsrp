@@ -75,7 +75,7 @@ export default async function VehiclePage({
         <span className="font-medium text-text-onlight">{vehicleTitle(vehicle)}</span>
       </nav>
 
-      <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.3fr_.9fr]">
+      <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-[1.3fr_.9fr]">
         <div className="min-w-0">
           <VehicleGallery photos={photos} title={vehicleTitle(vehicle)} />
         </div>
