@@ -74,3 +74,49 @@ body {
     animation: none;
   }
 }
+
+.range-accent {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 3px;
+  border-radius: 999px;
+  background: var(--color-line-dark);
+  outline: none;
+}
+
+.range-accent::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  border: 3px solid var(--color-ink);
+  box-shadow: 0 0 0 1px var(--color-accent);
+  cursor: pointer;
+}
+
+.range-accent::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  border: 3px solid var(--color-ink);
+  box-shadow: 0 0 0 1px var(--color-accent);
+  cursor: pointer;
+}
+
+.range-accent::-moz-range-track {
+  height: 3px;
+  border-radius: 999px;
+  background: transparent;
+}
+
+.range-accent:focus-visible::-webkit-slider-thumb {
+  box-shadow: 0 0 0 4px rgba(166, 30, 43, 0.35);
+}
+
+.range-accent:focus-visible::-moz-range-thumb {
+  box-shadow: 0 0 0 4px rgba(166, 30, 43, 0.35);
+}

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { AtSign, Clock, MapPin, MessageCircle, Phone, ShieldCheck, Star, CheckCircle2 } from "lucide-react";
+import { AtSign, Clock, MapPin, MessageCircle, Phone, ShieldCheck, Star } from "lucide-react";
 import { Button } from "@/components/Button";
 import { VehicleCard } from "@/components/VehicleCard";
 import { DifferentialsMarquee } from "@/components/DifferentialsMarquee";
@@ -18,12 +18,6 @@ import { whatsappLink } from "@/lib/format";
 export const revalidate = 3600;
 
 const ADDRESS = "Av. Professor João Fiúsa, 945 - B. Alto da Boa Vista, Ribeirão Preto - SP";
-
-const FINANCING_POINTS = [
-  "Taxas negociadas direto com os principais bancos",
-  "Aprovação rápida, sem burocracia",
-  "Condições sob medida pro seu perfil",
-];
 
 export default async function HomePage() {
   const [featured, differentials, about, testimonials, vehicleCount] = await Promise.all([
@@ -143,40 +137,6 @@ export default async function HomePage() {
           </div>
         </section>
       )}
-
-      {/* Financiamento */}
-      <section id="financiamento" className="scroll-mt-20 flex min-h-screen flex-col justify-center bg-surface py-16">
-        <div className="mx-auto w-full max-w-4xl px-5">
-          <div className="rounded-3xl border border-line-light bg-ink p-10 text-text-ondark shadow-xl sm:p-14">
-            <p className="font-data text-xs uppercase tracking-widest text-accent">Financiamento</p>
-            <h2 className="mt-1 font-display text-2xl font-bold sm:text-3xl">
-              Realize o sonho do seu carro novo.
-            </h2>
-            <p className="mt-3 max-w-xl text-sm text-text-ondark-dim">
-              Cuidamos de toda a parte de financiamento pra você sair de carro no mesmo dia.
-            </p>
-            <ul className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
-              {FINANCING_POINTS.map((p) => (
-                <li
-                  key={p}
-                  className="flex items-start gap-2 rounded-xl bg-ink-soft p-3 text-sm text-text-ondark"
-                >
-                  <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-accent" />
-                  {p}
-                </li>
-              ))}
-            </ul>
-            <Button
-              href={whatsappLink("Olá! Gostaria de simular um financiamento com a GF Motors.")}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-6"
-            >
-              Simular financiamento
-            </Button>
-          </div>
-        </div>
-      </section>
 
       {/* Fundador */}
       {about && (

@@ -25,54 +25,84 @@ export async function getFeaturedVehicles(limit = 4) {
 }
 
 export type VehicleFilters = {
-  brand?: string;
+  brands?: string[];
   category?: string;
+  transmissions?: string[];
+  fuels?: string[];
   minYear?: number;
   maxYear?: number;
   minPrice?: number;
   maxPrice?: number;
+  minKm?: number;
+  maxKm?: number;
   q?: string;
+  sort?: string;
 };
+
+const SORT_ORDER_BY: Record<string, { createdAt?: "asc" | "desc"; price?: "asc" | "desc"; yearModel?: "asc" | "desc"; km?: "asc" | "desc" }> = {
+  price_asc: { price: "asc" },
+  price_desc: { price: "desc" },
+  newest: { yearModel: "desc" },
+  km_asc: { km: "asc" },
+};
+
+type FacetDimension = "brand" | "transmission" | "fuel";
+
+function buildVehicleWhere(filters: VehicleFilters, exclude?: FacetDimension) {
+  return {
+    status: { not: "VENDIDO" as const },
+    ...(exclude !== "brand" && filters.brands?.length ? { brand: { in: filters.brands } } : {}),
+    ...(filters.category ? { category: filters.category as never } : {}),
+    ...(exclude !== "transmission" && filters.transmissions?.length
+      ? { transmission: { in: filters.transmissions as never[] } }
+      : {}),
+    ...(exclude !== "fuel" && filters.fuels?.length ? { fuel: { in: filters.fuels as never[] } } : {}),
+    ...(filters.minYear || filters.maxYear
+      ? {
+          yearModel: {
+            ...(filters.minYear ? { gte: filters.minYear } : {}),
+            ...(filters.maxYear ? { lte: filters.maxYear } : {}),
+          },
+        }
+      : {}),
+    ...(filters.minPrice || filters.maxPrice
+      ? {
+          price: {
+            ...(filters.minPrice ? { gte: filters.minPrice } : {}),
+            ...(filters.maxPrice ? { lte: filters.maxPrice } : {}),
+          },
+        }
+      : {}),
+    ...(filters.minKm || filters.maxKm
+      ? {
+          km: {
+            ...(filters.minKm ? { gte: filters.minKm } : {}),
+            ...(filters.maxKm ? { lte: filters.maxKm } : {}),
+          },
+        }
+      : {}),
+    ...(filters.q
+      ? {
+          OR: [
+            { brand: { contains: filters.q } },
+            { model: { contains: filters.q } },
+            { version: { contains: filters.q } },
+          ],
+        }
+      : {}),
+  };
+}
 
 export async function getVehicles(filters: VehicleFilters = {}) {
   return prisma.vehicle.findMany({
-    where: {
-      status: { not: "VENDIDO" },
-      ...(filters.brand ? { brand: filters.brand } : {}),
-      ...(filters.category ? { category: filters.category as never } : {}),
-      ...(filters.minYear || filters.maxYear
-        ? {
-            yearModel: {
-              ...(filters.minYear ? { gte: filters.minYear } : {}),
-              ...(filters.maxYear ? { lte: filters.maxYear } : {}),
-            },
-          }
-        : {}),
-      ...(filters.minPrice || filters.maxPrice
-        ? {
-            price: {
-              ...(filters.minPrice ? { gte: filters.minPrice } : {}),
-              ...(filters.maxPrice ? { lte: filters.maxPrice } : {}),
-            },
-          }
-        : {}),
-      ...(filters.q
-        ? {
-            OR: [
-              { brand: { contains: filters.q } },
-              { model: { contains: filters.q } },
-              { version: { contains: filters.q } },
-            ],
-          }
-        : {}),
-    },
-    orderBy: { createdAt: "desc" },
+    where: buildVehicleWhere(filters),
+    orderBy: (filters.sort && SORT_ORDER_BY[filters.sort]) || { createdAt: "desc" },
     select: CARD_SELECT,
   });
 }
 
-export async function getVehicleCount() {
-  return prisma.vehicle.count({ where: { status: { not: "VENDIDO" } } });
+export async function getVehicleCount(filters: VehicleFilters = {}) {
+  return prisma.vehicle.count({ where: buildVehicleWhere(filters) });
 }
 
 export async function getVehicleBrands() {
@@ -83,6 +113,58 @@ export async function getVehicleBrands() {
     orderBy: { brand: "asc" },
   });
   return rows.map((r) => r.brand);
+}
+
+/** Faixas reais (min/máx) de preço, ano e km do estoque ativo — usadas como limites dos sliders. */
+export async function getVehicleStockBounds() {
+  const agg = await prisma.vehicle.aggregate({
+    where: { status: { not: "VENDIDO" } },
+    _min: { price: true, yearModel: true, km: true },
+    _max: { price: true, yearModel: true, km: true },
+  });
+  const currentYear = new Date().getFullYear();
+  return {
+    minPrice: agg._min.price ?? 0,
+    maxPrice: agg._max.price ?? 0,
+    minYear: agg._min.yearModel ?? currentYear,
+    maxYear: agg._max.yearModel ?? currentYear,
+    minKm: agg._min.km ?? 0,
+    maxKm: agg._max.km ?? 0,
+  };
+}
+
+/**
+ * Contagem de veículos por marca/câmbio/combustível, cada uma calculada com os
+ * demais filtros ativos aplicados (exceto a própria dimensão) — igual a
+ * marketplaces com filtro à esquerda: marcar "Automático" não deve fazer a
+ * própria opção "Automático" sumir da lista.
+ */
+export async function getVehicleFacets(filters: VehicleFilters = {}) {
+  const [brandRows, transmissionRows, fuelRows] = await Promise.all([
+    prisma.vehicle.groupBy({
+      by: ["brand"],
+      where: buildVehicleWhere(filters, "brand"),
+      _count: { _all: true },
+    }),
+    prisma.vehicle.groupBy({
+      by: ["transmission"],
+      where: buildVehicleWhere(filters, "transmission"),
+      _count: { _all: true },
+    }),
+    prisma.vehicle.groupBy({
+      by: ["fuel"],
+      where: buildVehicleWhere(filters, "fuel"),
+      _count: { _all: true },
+    }),
+  ]);
+
+  return {
+    brands: Object.fromEntries(brandRows.map((r) => [r.brand, r._count._all])) as Record<string, number>,
+    transmissions: Object.fromEntries(
+      transmissionRows.map((r) => [r.transmission, r._count._all]),
+    ) as Record<string, number>,
+    fuels: Object.fromEntries(fuelRows.map((r) => [r.fuel, r._count._all])) as Record<string, number>,
+  };
 }
 
 export async function getAllVehicleSlugs() {
