@@ -12,7 +12,7 @@ import {
 } from "@/lib/queries";
 import { FUEL_OPTIONS, TRANSMISSION_OPTIONS } from "@/lib/options";
 
-export const metadata = { title: "Estoque" };
+export const metadata = { title: "Nossos carros" };
 
 function toInt(value: string | string[] | undefined) {
   if (!value || Array.isArray(value)) return undefined;
@@ -85,12 +85,15 @@ export default async function EstoquePage({
           Início
         </Link>
         <span>/</span>
-        <span className="font-medium text-text-onlight">Estoque</span>
+        <span className="font-medium text-text-onlight">Nossos carros</span>
       </nav>
 
       <div className="mb-10 flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
         <div>
-          <p className="font-data text-xs uppercase tracking-widest text-accent">Estoque</p>
+          <p className="flex items-center gap-2 font-data text-xs uppercase tracking-widest text-accent">
+            <span className="h-px w-4 bg-accent" />
+            Nossos carros
+          </p>
           <h1 className="mt-2 text-balance font-display text-4xl font-extrabold leading-[0.98] text-text-onlight sm:text-5xl">
             Encontre seu próximo carro
           </h1>

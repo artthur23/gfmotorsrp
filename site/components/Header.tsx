@@ -9,7 +9,7 @@ import { whatsappLink } from "@/lib/format";
 
 const NAV_LINKS = [
   { href: "/", label: "Início" },
-  { href: "/estoque", label: "Estoque" },
+  { href: "/estoque", label: "Nossos carros" },
   { href: "/#diferenciais", label: "Diferenciais" },
   { href: "/#fundador", label: "Fundador" },
   { href: "/#localizacao", label: "Localização" },

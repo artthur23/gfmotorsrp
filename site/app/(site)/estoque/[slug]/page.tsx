@@ -65,7 +65,7 @@ export default async function VehiclePage({
     <div className="mx-auto max-w-6xl px-5 py-10">
       <nav className="mb-6 text-xs text-text-onlight-dim">
         <Link href="/estoque" className="hover:text-accent">
-          Estoque
+          Nossos carros
         </Link>{" "}
         / <span>{vehicleTitle(vehicle)}</span>
       </nav>

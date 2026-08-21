@@ -31,7 +31,7 @@ export function Footer() {
             Navegação
           </h3>
           <ul className="space-y-2 text-sm">
-            <li><Link href="/estoque" className="hover:text-accent">Estoque</Link></li>
+            <li><Link href="/estoque" className="hover:text-accent">Nossos carros</Link></li>
             <li><Link href="/#diferenciais" className="hover:text-accent">Diferenciais</Link></li>
             <li><Link href="/#fundador" className="hover:text-accent">Fundador</Link></li>
             <li><Link href="/#contato" className="hover:text-accent">Contato</Link></li>
