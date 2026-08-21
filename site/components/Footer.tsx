@@ -1,11 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
-import { AtSign, MapPin, Phone } from "lucide-react";
+import { AtSign, Clock, MapPin, MessageCircle, Phone } from "lucide-react";
+import { whatsappLink } from "@/lib/format";
 
 export function Footer() {
   return (
     <footer className="border-t border-line-dark bg-ink text-text-ondark-dim">
-      <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:grid-cols-2 lg:grid-cols-3">
         <div>
           <div className="mb-4 flex items-center gap-3">
             <Image src="/logo.png" alt="GF Motors" width={36} height={44} />
@@ -16,14 +17,11 @@ export function Footer() {
           <p className="text-sm leading-relaxed">
             Seminovos e usados, nacionais e importados, em Ribeirão Preto - SP desde 2013.
           </p>
-          <a
-            href="https://www.instagram.com/gfmotorsrp/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-4 inline-flex items-center gap-2 text-sm text-text-ondark-dim hover:text-accent"
-          >
-            <AtSign size={16} /> @gfmotorsrp
-          </a>
+          <div className="mt-4 flex items-center gap-2">
+            <span className="h-1 w-8 rounded-full" style={{ background: "#2f6b4f" }} />
+            <span className="h-1 w-8 rounded-full bg-white" />
+            <span className="h-1 w-8 rounded-full bg-accent" />
+          </div>
         </div>
 
         <div>
@@ -31,6 +29,7 @@ export function Footer() {
             Navegação
           </h3>
           <ul className="space-y-2 text-sm">
+            <li><Link href="/" className="hover:text-accent">Início</Link></li>
             <li><Link href="/estoque" className="hover:text-accent">Nossos carros</Link></li>
             <li><Link href="/#diferenciais" className="hover:text-accent">Diferenciais</Link></li>
             <li><Link href="/#fundador" className="hover:text-accent">Fundador</Link></li>
@@ -57,17 +56,36 @@ export function Footer() {
                 CEP 14025-310
               </span>
             </li>
+            <li className="flex items-start gap-2">
+              <Clock size={16} className="mt-0.5 shrink-0" />
+              <span>
+                Segunda a sexta: 8h às 18h
+                <br />
+                Sábado: 8h às 13h
+              </span>
+            </li>
           </ul>
-        </div>
 
-        <div>
-          <h3 className="mb-4 font-display text-sm font-bold uppercase tracking-wider text-text-ondark">
-            Horário
-          </h3>
-          <ul className="space-y-2 text-sm">
-            <li>Segunda a sexta: 8h às 18h</li>
-            <li>Sábado: 8h às 13h</li>
-          </ul>
+          <div className="mt-4 flex gap-2">
+            <a
+              href={whatsappLink("Olá! Vim pelo site da GF Motors e gostaria de mais informações.")}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="WhatsApp"
+              className="flex size-9 items-center justify-center rounded-full border border-white/15 text-text-ondark-dim transition-colors hover:border-accent hover:text-accent"
+            >
+              <MessageCircle size={16} />
+            </a>
+            <a
+              href="https://www.instagram.com/gfmotorsrp/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              className="flex size-9 items-center justify-center rounded-full border border-white/15 text-text-ondark-dim transition-colors hover:border-accent hover:text-accent"
+            >
+              <AtSign size={16} />
+            </a>
+          </div>
         </div>
       </div>
 
