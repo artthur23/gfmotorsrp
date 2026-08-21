@@ -92,27 +92,25 @@ export default async function HomePage() {
 
       {/* Destaques */}
       {featured.length > 0 && (
-        <section className="flex min-h-screen flex-col justify-center px-5 py-16">
+        <section className="flex min-h-screen flex-col justify-center bg-ink px-5 py-16 text-text-ondark">
           <div className="mx-auto w-full max-w-6xl">
-            <div className="mb-8 flex items-end justify-between">
-              <div>
-                <p className="font-data text-xs uppercase tracking-widest text-accent">Destaques</p>
-                <h2 className="mt-1 font-display text-2xl font-bold text-text-onlight sm:text-3xl">
-                  Os mais desejados
-                </h2>
-              </div>
-              <Button variant="outline" href="/estoque" className="hidden sm:inline-flex">
-                Ver todos ({vehicleCount})
-              </Button>
-            </div>
-            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            <p className="flex items-center gap-2 font-data text-xs uppercase tracking-widest text-accent">
+              <span className="h-px w-4 bg-accent" />
+              Estoque atual
+            </p>
+            <h2 className="mt-2 font-display text-3xl font-extrabold sm:text-4xl">
+              Destaques do estoque
+            </h2>
+
+            <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
               {featured.map((v) => (
-                <VehicleCard key={v.slug} vehicle={v} />
+                <VehicleCard key={v.slug} vehicle={v} variant="dark" />
               ))}
             </div>
-            <Button variant="outline" href="/estoque" className="mt-6 flex sm:hidden">
-              Ver todos ({vehicleCount})
-            </Button>
+
+            <div className="mt-8 flex justify-center">
+              <Button href="/estoque">Ver todos os carros ({vehicleCount} veículos)</Button>
+            </div>
           </div>
         </section>
       )}

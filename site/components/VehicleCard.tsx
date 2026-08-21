@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Gauge, Fuel, Settings2 } from "lucide-react";
+import { ChevronRight, Gauge, Fuel, Settings2 } from "lucide-react";
 import {
   formatKm,
   formatPrice,
@@ -24,15 +24,24 @@ type VehicleCardData = {
   photos: { url: string }[];
 };
 
-export function VehicleCard({ vehicle }: { vehicle: VehicleCardData }) {
+export function VehicleCard({
+  vehicle,
+  variant = "light",
+}: {
+  vehicle: VehicleCardData;
+  variant?: "light" | "dark";
+}) {
   const cover = vehicle.photos[0]?.url ?? "/vehicle-placeholder.svg";
   const sold = vehicle.status === "VENDIDO";
   const reserved = vehicle.status === "RESERVADO";
+  const dark = variant === "dark";
 
   return (
     <Link
       href={`/estoque/${vehicle.slug}`}
-      className="group block overflow-hidden rounded-2xl border border-line-light bg-surface transition-shadow hover:shadow-xl"
+      className={`group flex h-full flex-col overflow-hidden rounded-2xl border transition-shadow hover:shadow-xl ${
+        dark ? "border-white/10 bg-ink-soft" : "border-line-light bg-surface"
+      }`}
     >
       <div className="relative aspect-4/3 overflow-hidden bg-ink">
         <Image
@@ -53,12 +62,20 @@ export function VehicleCard({ vehicle }: { vehicle: VehicleCardData }) {
         )}
       </div>
 
-      <div className="p-4">
-        <h3 className="font-display text-lg font-bold leading-tight text-text-onlight">
+      <div className="flex flex-1 flex-col p-4">
+        <h3
+          className={`line-clamp-2 min-h-11 font-display text-lg font-bold leading-tight ${
+            dark ? "text-text-ondark" : "text-text-onlight"
+          }`}
+        >
           {vehicleTitle(vehicle)}
         </h3>
 
-        <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs text-text-onlight-dim">
+        <div
+          className={`mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs ${
+            dark ? "text-text-ondark-dim" : "text-text-onlight-dim"
+          }`}
+        >
           <span className="flex items-center gap-1">
             <Gauge size={13} /> {formatKm(vehicle.km)}
           </span>
@@ -70,9 +87,19 @@ export function VehicleCard({ vehicle }: { vehicle: VehicleCardData }) {
           </span>
         </div>
 
-        <p className="mt-3 font-display text-xl font-extrabold text-accent">
-          {formatPrice(vehicle.price)}
-        </p>
+        <div className="mt-auto flex items-end justify-between pt-3">
+          <p
+            className={`font-display text-xl font-extrabold ${
+              dark ? "text-text-ondark" : "text-accent"
+            }`}
+          >
+            {formatPrice(vehicle.price)}
+          </p>
+          <span className="flex shrink-0 items-center gap-0.5 text-xs font-semibold text-accent">
+            Ver detalhes
+            <ChevronRight size={14} />
+          </span>
+        </div>
       </div>
     </Link>
   );

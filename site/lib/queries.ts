@@ -15,13 +15,26 @@ const CARD_SELECT = {
   photos: { orderBy: { order: "asc" as const }, take: 1, select: { url: true } },
 };
 
-export async function getFeaturedVehicles(limit = 4) {
-  return prisma.vehicle.findMany({
+export async function getFeaturedVehicles(limit = 8) {
+  const featured = await prisma.vehicle.findMany({
     where: { featured: true, status: { not: "VENDIDO" } },
     orderBy: { createdAt: "desc" },
     take: limit,
     select: CARD_SELECT,
   });
+
+  if (featured.length >= limit) return featured;
+
+  // Completa a grade com os veículos mais recentes quando não há
+  // destaques suficientes marcados manualmente no admin.
+  const rest = await prisma.vehicle.findMany({
+    where: { status: { not: "VENDIDO" }, slug: { notIn: featured.map((v) => v.slug) } },
+    orderBy: { createdAt: "desc" },
+    take: limit - featured.length,
+    select: CARD_SELECT,
+  });
+
+  return [...featured, ...rest];
 }
 
 export type VehicleFilters = {
