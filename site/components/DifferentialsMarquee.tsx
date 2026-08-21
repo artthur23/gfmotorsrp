@@ -1,5 +1,5 @@
 import {
-  ShieldCheck,
+  BadgeCheck,
   CreditCard,
   MessageCircle,
   Globe2,
@@ -7,7 +7,11 @@ import {
 } from "lucide-react";
 import type { Differential } from "@/lib/queries";
 
-const ICONS: LucideIcon[] = [ShieldCheck, CreditCard, MessageCircle, Globe2];
+const ICONS: LucideIcon[] = [BadgeCheck, CreditCard, MessageCircle, Globe2];
+
+// Vermelho mais forte/vivo que o accent padrão da marca (#A61E2B),
+// usado só aqui pra dar mais destaque aos ícones da faixa animada.
+const STRONG_RED = "#e5252f";
 
 // Repeated enough times so a single track's natural width comfortably
 // exceeds any realistic viewport, even with just 1-2 differentials.
@@ -23,15 +27,22 @@ function Track({ items }: { items: Differential[] }) {
         return (
           <div key={`${d.titulo}-${i}`} className="flex shrink-0 items-center gap-2">
             <span
-              className="flex size-8 shrink-0 items-center justify-center rounded-md border border-accent bg-accent/25 text-accent"
-              style={{ boxShadow: "0 0 12px 1px rgba(166,30,43,.6)" }}
+              className="flex size-8 shrink-0 items-center justify-center rounded-md"
+              style={{
+                border: `1px solid ${STRONG_RED}`,
+                background: `${STRONG_RED}30`,
+                color: STRONG_RED,
+                boxShadow: `0 0 14px 2px ${STRONG_RED}99`,
+              }}
             >
               <Icon size={16} />
             </span>
             <span className="whitespace-nowrap font-display text-base font-bold text-text-ondark">
               {d.titulo}
             </span>
-            <span className="ml-1 text-base text-accent">•</span>
+            <span className="ml-1 text-base" style={{ color: STRONG_RED }}>
+              •
+            </span>
           </div>
         );
       })}
