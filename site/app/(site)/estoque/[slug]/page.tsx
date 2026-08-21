@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Calendar, Fuel, Gauge, Palette, Settings2 } from "lucide-react";
+import { Calendar, CheckCircle2, Fuel, Gauge, MessageCircle, Palette, Settings2 } from "lucide-react";
 import { VehicleCard } from "@/components/VehicleCard";
 import { VehicleGallery } from "@/components/VehicleGallery";
 import { VehicleFeatures } from "@/components/VehicleFeatures";
@@ -63,39 +63,49 @@ export default async function VehiclePage({
 
   return (
     <div className="mx-auto max-w-6xl px-5 py-10">
-      <nav className="mb-6 text-xs text-text-onlight-dim">
+      <nav className="mb-6 flex items-center gap-2 text-xs text-text-onlight-dim">
+        <Link href="/" className="hover:text-accent">
+          Início
+        </Link>
+        <span>/</span>
         <Link href="/estoque" className="hover:text-accent">
           Nossos carros
-        </Link>{" "}
-        / <span>{vehicleTitle(vehicle)}</span>
+        </Link>
+        <span>/</span>
+        <span className="font-medium text-text-onlight">{vehicleTitle(vehicle)}</span>
       </nav>
 
-      <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1.3fr_.9fr]">
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.3fr_.9fr]">
         <div className="min-w-0">
           <VehicleGallery photos={photos} title={vehicleTitle(vehicle)} />
         </div>
 
-        <div className="min-w-0">
-          <p className="font-data text-xs uppercase tracking-widest text-accent">
-            {categoryLabel(vehicle.category)}
+        <div className="min-w-0 rounded-3xl border border-line-dark bg-ink p-7 text-text-ondark">
+          <p className="flex items-center gap-2 font-data text-xs font-semibold uppercase tracking-widest text-accent">
+            <span className="h-px w-4 bg-accent" />
+            {vehicle.brand} • {vehicle.yearModel}
           </p>
-          <h1 className="mt-1 font-display text-3xl font-extrabold text-text-onlight">
+          <h1 className="mt-3 font-display text-2xl font-extrabold leading-tight sm:text-3xl">
             {vehicleTitle(vehicle)}
           </h1>
-          <p className="mt-3 font-display text-3xl font-extrabold text-accent">
+
+          <p className="mt-6 font-data text-xs uppercase tracking-widest text-text-ondark-dim">
+            Valor
+          </p>
+          <p className="mt-1 font-display text-4xl font-extrabold sm:text-5xl">
             {formatPrice(vehicle.price)}
           </p>
 
-          <div className="mt-6 grid grid-cols-2 gap-4 rounded-2xl border border-line-light bg-surface p-5">
+          <div className="mt-6 grid grid-cols-2 gap-3">
             {specs.map((s) => (
-              <div key={s.label} className="flex items-start gap-2">
-                <s.icon size={16} className="mt-0.5 shrink-0 text-accent" />
-                <div>
-                  <p className="text-[11px] uppercase tracking-wide text-text-onlight-dim">
-                    {s.label}
-                  </p>
-                  <p className="text-sm font-medium text-text-onlight">{s.value}</p>
-                </div>
+              <div key={s.label} className="rounded-xl bg-ink-soft p-4">
+                <span className="flex size-9 items-center justify-center rounded-lg bg-accent/20 text-accent">
+                  <s.icon size={18} />
+                </span>
+                <p className="mt-3 text-[11px] uppercase tracking-wide text-text-ondark-dim">
+                  {s.label}
+                </p>
+                <p className="mt-0.5 text-sm font-bold text-text-ondark">{s.value}</p>
               </div>
             ))}
           </div>
@@ -104,10 +114,22 @@ export default async function VehiclePage({
             href={whatsappLink(vehicleWhatsappMessage(vehicle))}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-4 flex items-center justify-center rounded-full bg-accent px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-accent-strong"
+            className="mt-6 flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-6 py-3.5 text-base font-semibold text-white transition-colors hover:bg-[#1fbd5a]"
           >
-            Falar no WhatsApp sobre esse veículo
+            <MessageCircle size={18} />
+            Falar com um vendedor
           </a>
+
+          <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2">
+            <span className="flex items-center gap-1.5 text-xs text-text-ondark-dim">
+              <CheckCircle2 size={14} className="text-[#25D366]" />
+              Procedência verificada
+            </span>
+            <span className="flex items-center gap-1.5 text-xs text-text-ondark-dim">
+              <CheckCircle2 size={14} className="text-[#25D366]" />
+              Documentação completa
+            </span>
+          </div>
         </div>
       </div>
 
