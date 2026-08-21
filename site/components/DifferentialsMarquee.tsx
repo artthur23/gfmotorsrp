@@ -21,13 +21,13 @@ function Track({ items }: { items: Differential[] }) {
   const repeated = Array.from({ length: REPEAT }, () => items).flat();
 
   return (
-    <div className="flex shrink-0 items-center gap-9 px-5" aria-hidden>
+    <div className="flex shrink-0 items-center gap-12 px-6" aria-hidden>
       {repeated.map((d, i) => {
         const Icon = ICONS[i % ICONS.length];
         return (
-          <div key={`${d.titulo}-${i}`} className="flex shrink-0 items-center gap-2">
+          <div key={`${d.titulo}-${i}`} className="flex shrink-0 items-center gap-3">
             <span
-              className="flex size-8 shrink-0 items-center justify-center rounded-md"
+              className="flex size-11 shrink-0 items-center justify-center rounded-lg"
               style={{
                 border: `1px solid ${STRONG_RED}`,
                 background: `${STRONG_RED}30`,
@@ -35,12 +35,12 @@ function Track({ items }: { items: Differential[] }) {
                 boxShadow: `0 0 14px 2px ${STRONG_RED}99`,
               }}
             >
-              <Icon size={16} />
+              <Icon size={20} />
             </span>
-            <span className="whitespace-nowrap font-display text-base font-bold text-text-ondark">
+            <span className="whitespace-nowrap font-display text-lg font-bold text-text-ondark">
               {d.titulo}
             </span>
-            <span className="ml-1 text-base" style={{ color: STRONG_RED }}>
+            <span className="ml-2 text-lg" style={{ color: STRONG_RED }}>
               •
             </span>
           </div>
@@ -55,7 +55,7 @@ export function DifferentialsMarquee({ items }: { items: Differential[] }) {
 
   return (
     <div
-      className="relative w-full overflow-hidden py-6"
+      className="relative w-full overflow-hidden py-8"
       style={{
         maskImage:
           "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
