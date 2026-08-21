@@ -1,20 +1,24 @@
 @import "tailwindcss";
 
+/* Paleta replicada 1:1 das custom properties do site da Belloni Motors
+   (bellonimotors.com), a pedido — ink/paper/accent/line/text abaixo
+   têm os mesmos valores computados no site deles. */
 :root {
-  --color-ink: #0e0f11;
-  --color-ink-soft: #17191c;
-  --color-paper: #f1f2f2;
+  --color-ink: #0a0a0b;
+  --color-ink-soft: #111114;
+  --color-paper: #f6f4ef;
   --color-surface: #ffffff;
-  --color-accent: #a61e2b;
-  --color-accent-strong: #c4212f;
+  --color-accent: #ec182f;
+  --color-accent-strong: #bd1023;
   --color-chrome: #9aa0a5;
   --color-chrome-light: #d8dadc;
-  --color-line-dark: #26292d;
-  --color-line-light: #e2e0dc;
-  --color-text-onlight: #14161a;
-  --color-text-onlight-dim: #52585e;
-  --color-text-ondark: #f2f1ee;
-  --color-text-ondark-dim: #a7acb0;
+  --color-line-dark: #232324;
+  --color-line-light: #dad7d1;
+  --color-text-onlight: #0a0a0b;
+  --color-text-onlight-dim: #646361;
+  --color-text-ondark: #ffffff;
+  --color-text-ondark-dim: #9d9d9d;
+  --color-tricolor-green: #006343;
 }
 
 @theme inline {
@@ -32,6 +36,7 @@
   --color-text-onlight-dim: var(--color-text-onlight-dim);
   --color-text-ondark: var(--color-text-ondark);
   --color-text-ondark-dim: var(--color-text-ondark-dim);
+  --color-tricolor-green: var(--color-tricolor-green);
 
   --font-display: var(--font-big-shoulders), ui-sans-serif, sans-serif;
   --font-body: var(--font-work-sans), ui-sans-serif, sans-serif;

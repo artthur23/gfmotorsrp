@@ -19,7 +19,7 @@ export function Footer() {
             Seminovos e usados, nacionais e importados, em Ribeirão Preto - SP desde 2013.
           </p>
           <div className="mt-4 flex items-center gap-2">
-            <span className="h-1 w-8 rounded-full" style={{ background: "#2f6b4f" }} />
+            <span className="h-1 w-8 rounded-full" style={{ background: "var(--color-tricolor-green)" }} />
             <span className="h-1 w-8 rounded-full bg-white" />
             <span className="h-1 w-8 rounded-full bg-accent" />
           </div>

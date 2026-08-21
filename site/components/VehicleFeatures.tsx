@@ -21,7 +21,7 @@ export function VehicleFeatures({ features }: { features: string[] }) {
             key={f}
             className="inline-flex items-center gap-2 rounded-full border border-line-light bg-surface px-4 py-2 text-sm text-text-onlight"
           >
-            <span className="size-1.5 shrink-0 rounded-full" style={{ background: "#2f6b4f" }} />
+            <span className="size-1.5 shrink-0 rounded-full" style={{ background: "var(--color-tricolor-green)" }} />
             {f}
           </span>
         ))}

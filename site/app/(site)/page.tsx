@@ -141,11 +141,10 @@ export default async function HomePage() {
         <section id="fundador" className="scroll-mt-20 relative flex min-h-screen flex-col justify-center overflow-hidden bg-ink text-text-ondark">
           <div
             className="pointer-events-none absolute -left-24 top-0 h-80 w-80 rounded-full opacity-25 blur-3xl"
-            style={{ background: "#2f6b4f" }}
+            style={{ background: "var(--color-tricolor-green)" }}
           />
           <div
-            className="pointer-events-none absolute -right-24 bottom-0 h-80 w-80 rounded-full opacity-25 blur-3xl"
-            style={{ background: "#a61e2b" }}
+            className="pointer-events-none absolute -right-24 bottom-0 h-80 w-80 rounded-full opacity-25 blur-3xl bg-accent"
           />
 
           <div className="relative mx-auto grid w-full max-w-5xl grid-cols-1 items-end gap-6 px-5 py-16 lg:grid-cols-[.85fr_1.15fr] lg:gap-12">
@@ -162,7 +161,7 @@ export default async function HomePage() {
                 />
               </div>
               <div className="mt-3 flex items-center gap-2 px-1">
-                <span className="h-1.5 flex-1 rounded-full" style={{ background: "#2f6b4f" }} />
+                <span className="h-1.5 flex-1 rounded-full" style={{ background: "var(--color-tricolor-green)" }} />
                 <span className="h-1.5 flex-1 rounded-full bg-white" />
                 <span className="h-1.5 flex-1 rounded-full bg-accent" />
               </div>

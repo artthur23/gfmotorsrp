@@ -9,10 +9,6 @@ import type { Differential } from "@/lib/queries";
 
 const ICONS: LucideIcon[] = [BadgeCheck, CreditCard, MessageCircle, Globe2];
 
-// Vermelho mais forte/vivo que o accent padrão da marca (#A61E2B),
-// usado só aqui pra dar mais destaque aos ícones da faixa animada.
-const STRONG_RED = "#e5252f";
-
 // Repeated enough times so a single track's natural width comfortably
 // exceeds any realistic viewport, even with just 1-2 differentials.
 const REPEAT = 8;
@@ -27,22 +23,15 @@ function Track({ items }: { items: Differential[] }) {
         return (
           <div key={`${d.titulo}-${i}`} className="flex shrink-0 items-center gap-3">
             <span
-              className="flex size-11 shrink-0 items-center justify-center rounded-lg"
-              style={{
-                border: `1px solid ${STRONG_RED}`,
-                background: `${STRONG_RED}30`,
-                color: STRONG_RED,
-                boxShadow: `0 0 14px 2px ${STRONG_RED}99`,
-              }}
+              className="flex size-11 shrink-0 items-center justify-center rounded-lg border border-accent bg-accent/30 text-accent"
+              style={{ boxShadow: "0 0 14px 2px rgba(236,24,47,.6)" }}
             >
               <Icon size={20} />
             </span>
             <span className="whitespace-nowrap font-display text-lg font-bold text-text-ondark">
               {d.titulo}
             </span>
-            <span className="ml-2 text-lg" style={{ color: STRONG_RED }}>
-              •
-            </span>
+            <span className="ml-2 text-lg text-accent">•</span>
           </div>
         );
       })}
