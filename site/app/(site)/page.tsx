@@ -46,7 +46,8 @@ export default async function HomePage() {
         />
         <div className="relative mx-auto grid max-w-6xl flex-1 items-center gap-10 px-5 py-16 lg:grid-cols-[1.1fr_.9fr]">
           <div>
-            <p className="font-data text-xs uppercase tracking-[0.2em] text-accent">
+            <p className="flex items-center gap-2 font-data text-xs uppercase tracking-[0.2em] text-accent">
+              <span className="h-px w-4 bg-accent" />
               Seminovos &amp; importados · Ribeirão Preto
             </p>
             <h1 className="mt-4 text-balance font-display text-4xl font-extrabold leading-[0.98] sm:text-5xl lg:text-6xl">
@@ -133,7 +134,10 @@ export default async function HomePage() {
         <section id="diferenciais" className="scroll-mt-20 flex min-h-screen flex-col justify-center bg-[#24231F] text-text-ondark">
           <div className="mx-auto w-full max-w-6xl px-5 py-16">
             <Reveal>
-              <p className="font-data text-xs uppercase tracking-widest text-accent">Diferenciais</p>
+              <p className="flex items-center gap-2 font-data text-xs uppercase tracking-widest text-accent">
+                <span className="h-px w-4 bg-accent" />
+                Diferenciais
+              </p>
               <h2 className="mt-1 mb-10 font-display text-2xl font-bold sm:text-3xl">
                 Por que comprar na GF Motors?
               </h2>
