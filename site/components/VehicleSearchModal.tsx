@@ -123,6 +123,14 @@ export function VehicleSearchModal({
               <X size={16} />
             </button>
           )}
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Fechar busca"
+            className="shrink-0 text-text-ondark-dim hover:text-text-ondark"
+          >
+            <X size={18} />
+          </button>
           <span className="hidden shrink-0 rounded border border-white/15 px-1.5 py-0.5 font-data text-[10px] text-text-ondark-dim sm:inline">
             ESC
           </span>
