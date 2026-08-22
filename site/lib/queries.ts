@@ -37,6 +37,16 @@ export async function getFeaturedVehicles(limit = 8) {
   return [...featured, ...rest];
 }
 
+/** Os N veículos de maior valor no estoque ativo, do mais caro pro mais barato. */
+export async function getTopPricedVehicles(limit = 8) {
+  return prisma.vehicle.findMany({
+    where: { status: { not: "VENDIDO" } },
+    orderBy: { price: "desc" },
+    take: limit,
+    select: CARD_SELECT,
+  });
+}
+
 export type VehicleFilters = {
   brands?: string[];
   category?: string;

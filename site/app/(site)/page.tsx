@@ -8,6 +8,7 @@ import {
   getDifferentials,
   getFeaturedVehicles,
   getSiteContent,
+  getTopPricedVehicles,
   getVehicleCount,
 } from "@/lib/queries";
 import { whatsappLink } from "@/lib/format";
@@ -20,8 +21,9 @@ export const revalidate = 3600;
 const ADDRESS = "Av. Professor João Fiúsa, 945 - B. Alto da Boa Vista, Ribeirão Preto - SP";
 
 export default async function HomePage() {
-  const [featured, differentials, about, testimonials, vehicleCount] = await Promise.all([
-    getFeaturedVehicles(),
+  const [featured, topPriced, differentials, about, testimonials, vehicleCount] = await Promise.all([
+    getFeaturedVehicles(1),
+    getTopPricedVehicles(8),
     getDifferentials(),
     getSiteContent("sobre_empresa"),
     getApprovedTestimonials(),
@@ -91,7 +93,7 @@ export default async function HomePage() {
       </section>
 
       {/* Destaques */}
-      {featured.length > 0 && (
+      {topPriced.length > 0 && (
         <section className="flex min-h-screen flex-col justify-center bg-ink px-5 py-16 text-text-ondark">
           <div className="mx-auto w-full max-w-6xl">
             <p className="flex items-center gap-2 font-data text-xs uppercase tracking-widest text-accent">
@@ -103,7 +105,7 @@ export default async function HomePage() {
             </h2>
 
             <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-              {featured.map((v) => (
+              {topPriced.map((v) => (
                 <VehicleCard key={v.slug} vehicle={v} variant="dark" />
               ))}
             </div>
