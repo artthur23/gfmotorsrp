@@ -139,8 +139,8 @@ export default async function HomePage() {
             </Reveal>
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
               {differentials.map((d, i) => (
-                <Reveal key={d.titulo} delay={Math.min(i, 6) * 60}>
-                  <div className="rounded-2xl border border-white/10 bg-ink-soft p-6">
+                <Reveal key={d.titulo} delay={Math.min(i, 6) * 60} className="h-full">
+                  <div className="h-full rounded-2xl border border-white/10 bg-ink-soft p-6">
                     <ShieldCheck className="mb-3 text-accent" size={22} />
                     <h3 className="font-display text-base font-bold">{d.titulo}</h3>
                     <p className="mt-1 text-sm text-text-ondark-dim">{d.texto}</p>
@@ -232,8 +232,8 @@ export default async function HomePage() {
             </Reveal>
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {testimonials.map((t, i) => (
-                <Reveal key={t.id} delay={Math.min(i, 6) * 60}>
-                  <div className="rounded-2xl border border-line-light bg-ink p-6 text-text-ondark shadow-sm">
+                <Reveal key={t.id} delay={Math.min(i, 6) * 60} className="h-full">
+                  <div className="flex h-full flex-col rounded-2xl border border-line-light bg-ink p-6 text-text-ondark shadow-sm">
                     <div className="mb-2 flex gap-0.5 text-accent">
                       {Array.from({ length: t.rating }).map((_, i) => (
                         <Star key={i} size={14} fill="currentColor" />
