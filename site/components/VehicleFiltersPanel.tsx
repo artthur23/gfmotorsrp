@@ -163,13 +163,13 @@ export function VehicleFiltersPanel({
   const kmValue = state.maxKm ?? bounds.maxKm;
 
   return (
-    <aside className="h-fit rounded-3xl border border-line-dark bg-ink text-text-ondark lg:sticky lg:top-24">
+    <aside className="h-fit rounded-3xl border border-line-dark bg-ink text-text-ondark lg:sticky lg:top-24 lg:flex lg:max-h-[calc(100vh-7rem)] lg:flex-col">
       <button
         type="button"
         onClick={() => setMobileOpen((v) => !v)}
         aria-expanded={mobileOpen}
         aria-controls="filtros-painel"
-        className="flex w-full items-center justify-between p-7 lg:pointer-events-none lg:cursor-default"
+        className="flex w-full shrink-0 items-center justify-between p-7 lg:pointer-events-none lg:cursor-default"
       >
         <span className="font-display text-2xl font-bold">
           Filtros{activeCount > 0 ? ` (${activeCount})` : ""}
@@ -180,7 +180,10 @@ export function VehicleFiltersPanel({
         />
       </button>
 
-      <div id="filtros-painel" className={`${mobileOpen ? "block" : "hidden"} px-7 pb-7 lg:block`}>
+      <div
+        id="filtros-painel"
+        className={`no-scrollbar ${mobileOpen ? "block" : "hidden"} px-7 pb-7 lg:block lg:min-h-0 lg:flex-1 lg:overflow-y-auto`}
+      >
         <div className="divide-y divide-line-dark">
           <FilterSection title="Marca" defaultOpen>
             <div className="flex max-h-52 flex-col gap-2.5 overflow-y-auto pr-1">

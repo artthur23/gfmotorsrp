@@ -83,6 +83,15 @@ body {
   animation: marquee 228s linear infinite;
 }
 
+/* Rolagem funcional, mas sem a barra visível (ex: painel de filtros). */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee {
     animation: none;
