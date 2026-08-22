@@ -34,8 +34,9 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* Hero */}
-      <section className="relative flex min-h-screen flex-col overflow-hidden bg-ink text-text-ondark">
+      {/* Hero — cancela o padding-top do <main> pra ficar por trás do
+          cabeçalho, que começa transparente nessa página */}
+      <section className="relative -mt-(--header-h) flex min-h-screen flex-col overflow-hidden bg-ink text-text-ondark">
         <div
           className="pointer-events-none absolute inset-0"
           style={{

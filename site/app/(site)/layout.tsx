@@ -15,7 +15,10 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
   return (
     <>
       <Header searchVehicles={searchVehicles} searchBrands={searchBrands} />
-      <main className="flex-1">{children}</main>
+      {/* Compensa o Header virar `fixed` (fica fora do fluxo). A home
+          cancela isso com -mt-[var(--header-h)] no hero, pra ele ficar
+          por trás do cabeçalho transparente no topo da página. */}
+      <main className="flex-1 pt-(--header-h)">{children}</main>
       <Footer />
     </>
   );

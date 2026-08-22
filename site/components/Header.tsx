@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Menu, Search, X } from "lucide-react";
 import { whatsappLink } from "@/lib/format";
 import { WhatsAppGlyphIcon } from "@/components/icons/BrandIcons";
@@ -29,8 +29,31 @@ export function Header({
   const [open, setOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
 
+  // Só a home tem hero em tela cheia logo abaixo do cabeçalho — nas
+  // outras páginas ele fica sempre sólido (o fundo delas é claro).
+  const isHome = pathname === "/";
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    if (!isHome) return;
+    function onScroll() {
+      setScrolled(window.scrollY > 20);
+    }
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [isHome]);
+
+  const transparent = isHome && !scrolled;
+
   return (
-    <header className="sticky top-0 z-50 border-b border-line-dark bg-ink/95 backdrop-blur">
+    <header
+      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
+        transparent
+          ? "border-b border-transparent bg-transparent"
+          : "border-b border-line-dark bg-ink/95 backdrop-blur"
+      }`}
+    >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-3">
         <Link href="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
           <Image src="/logo.png" alt="GF Motors" width={40} height={48} priority />
