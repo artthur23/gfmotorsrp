@@ -3,6 +3,7 @@ import { Search } from "lucide-react";
 import { VehicleCard } from "@/components/VehicleCard";
 import { SortSelect } from "@/components/SortSelect";
 import { VehicleFiltersPanel } from "@/components/VehicleFiltersPanel";
+import { Reveal } from "@/components/Reveal";
 import {
   getVehicleBrands,
   getVehicleCount,
@@ -185,8 +186,10 @@ export default async function EstoquePage({
             </p>
           ) : (
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
-              {vehicles.map((v) => (
-                <VehicleCard key={v.slug} vehicle={v} variant="dark" />
+              {vehicles.map((v, i) => (
+                <Reveal key={v.slug} delay={Math.min(i, 6) * 60}>
+                  <VehicleCard vehicle={v} variant="dark" />
+                </Reveal>
               ))}
             </div>
           )}

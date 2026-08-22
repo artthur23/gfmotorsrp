@@ -4,6 +4,7 @@ import { WhatsAppGlyphIcon } from "@/components/icons/BrandIcons";
 import { Button } from "@/components/Button";
 import { VehicleCard } from "@/components/VehicleCard";
 import { DifferentialsMarquee } from "@/components/DifferentialsMarquee";
+import { Reveal } from "@/components/Reveal";
 import {
   getApprovedTestimonials,
   getDifferentials,
@@ -101,23 +102,27 @@ export default async function HomePage() {
       {topPriced.length > 0 && (
         <section className="flex min-h-screen flex-col justify-center bg-ink px-5 py-16 text-text-ondark">
           <div className="mx-auto w-full max-w-6xl">
-            <p className="flex items-center gap-2 font-data text-xs uppercase tracking-widest text-accent">
-              <span className="h-px w-4 bg-accent" />
-              Estoque atual
-            </p>
-            <h2 className="mt-2 font-display text-3xl font-extrabold sm:text-4xl">
-              Destaques do estoque
-            </h2>
+            <Reveal>
+              <p className="flex items-center gap-2 font-data text-xs uppercase tracking-widest text-accent">
+                <span className="h-px w-4 bg-accent" />
+                Estoque atual
+              </p>
+              <h2 className="mt-2 font-display text-3xl font-extrabold sm:text-4xl">
+                Destaques do estoque
+              </h2>
+            </Reveal>
 
             <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-              {topPriced.map((v) => (
-                <VehicleCard key={v.slug} vehicle={v} variant="dark" />
+              {topPriced.map((v, i) => (
+                <Reveal key={v.slug} delay={Math.min(i, 6) * 60}>
+                  <VehicleCard vehicle={v} variant="dark" />
+                </Reveal>
               ))}
             </div>
 
-            <div className="mt-8 flex justify-center">
+            <Reveal className="mt-8 flex justify-center">
               <Button href="/estoque">Ver todos os carros ({vehicleCount} veículos)</Button>
-            </div>
+            </Reveal>
           </div>
         </section>
       )}
@@ -126,17 +131,21 @@ export default async function HomePage() {
       {differentials.length > 0 && (
         <section id="diferenciais" className="scroll-mt-20 flex min-h-screen flex-col justify-center bg-ink text-text-ondark">
           <div className="mx-auto w-full max-w-6xl px-5 py-16">
-            <p className="font-data text-xs uppercase tracking-widest text-accent">Diferenciais</p>
-            <h2 className="mt-1 mb-10 font-display text-2xl font-bold sm:text-3xl">
-              Por que comprar na GF Motors?
-            </h2>
+            <Reveal>
+              <p className="font-data text-xs uppercase tracking-widest text-accent">Diferenciais</p>
+              <h2 className="mt-1 mb-10 font-display text-2xl font-bold sm:text-3xl">
+                Por que comprar na GF Motors?
+              </h2>
+            </Reveal>
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-              {differentials.map((d) => (
-                <div key={d.titulo} className="rounded-2xl border border-white/10 bg-ink-soft p-6">
-                  <ShieldCheck className="mb-3 text-accent" size={22} />
-                  <h3 className="font-display text-base font-bold">{d.titulo}</h3>
-                  <p className="mt-1 text-sm text-text-ondark-dim">{d.texto}</p>
-                </div>
+              {differentials.map((d, i) => (
+                <Reveal key={d.titulo} delay={Math.min(i, 6) * 60}>
+                  <div className="rounded-2xl border border-white/10 bg-ink-soft p-6">
+                    <ShieldCheck className="mb-3 text-accent" size={22} />
+                    <h3 className="font-display text-base font-bold">{d.titulo}</h3>
+                    <p className="mt-1 text-sm text-text-ondark-dim">{d.texto}</p>
+                  </div>
+                </Reveal>
               ))}
             </div>
           </div>
@@ -155,7 +164,7 @@ export default async function HomePage() {
           />
 
           <div className="relative mx-auto grid w-full max-w-5xl grid-cols-1 items-end gap-6 px-5 py-16 lg:grid-cols-[.85fr_1.15fr] lg:gap-12">
-            <div className="relative mx-auto w-full max-w-70 sm:max-w-80 lg:mx-0 lg:max-w-96">
+            <Reveal className="relative mx-auto w-full max-w-70 sm:max-w-80 lg:mx-0 lg:max-w-96">
               <div className="relative aspect-629/1024 w-full">
                 <Image
                   src="/team/givago-retrato-cutout.png"
@@ -172,9 +181,12 @@ export default async function HomePage() {
                 <span className="h-1.5 flex-1 rounded-full bg-white" />
                 <span className="h-1.5 flex-1 rounded-full bg-accent" />
               </div>
-            </div>
+            </Reveal>
 
-            <div className="rounded-3xl border border-white/10 bg-ink-soft p-8 text-center sm:p-10 lg:text-left">
+            <Reveal
+              delay={120}
+              className="rounded-3xl border border-white/10 bg-ink-soft p-8 text-center sm:p-10 lg:text-left"
+            >
               <p className="flex items-center justify-center gap-2 font-data text-xs uppercase tracking-widest text-accent lg:justify-start">
                 <span className="h-px w-4 bg-accent" />
                 O fundador
@@ -204,7 +216,7 @@ export default async function HomePage() {
                   <p className="text-xs text-text-ondark-dim">Fundador da GF Motors</p>
                 </div>
               </div>
-            </div>
+            </Reveal>
           </div>
         </section>
       )}
@@ -213,27 +225,28 @@ export default async function HomePage() {
       {testimonials.length > 0 && (
         <section className="flex min-h-screen flex-col justify-center bg-surface py-16">
           <div className="mx-auto w-full max-w-6xl px-5">
-            <h2 className="mb-8 font-display text-2xl font-bold text-text-onlight sm:text-3xl">
-              O que nossos clientes dizem
-            </h2>
+            <Reveal>
+              <h2 className="mb-8 font-display text-2xl font-bold text-text-onlight sm:text-3xl">
+                O que nossos clientes dizem
+              </h2>
+            </Reveal>
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {testimonials.map((t) => (
-                <div
-                  key={t.id}
-                  className="rounded-2xl border border-line-light bg-ink p-6 text-text-ondark shadow-sm"
-                >
-                  <div className="mb-2 flex gap-0.5 text-accent">
-                    {Array.from({ length: t.rating }).map((_, i) => (
-                      <Star key={i} size={14} fill="currentColor" />
-                    ))}
+              {testimonials.map((t, i) => (
+                <Reveal key={t.id} delay={Math.min(i, 6) * 60}>
+                  <div className="rounded-2xl border border-line-light bg-ink p-6 text-text-ondark shadow-sm">
+                    <div className="mb-2 flex gap-0.5 text-accent">
+                      {Array.from({ length: t.rating }).map((_, i) => (
+                        <Star key={i} size={14} fill="currentColor" />
+                      ))}
+                    </div>
+                    <p className="text-sm leading-relaxed text-text-ondark-dim">
+                      &ldquo;{t.text}&rdquo;
+                    </p>
+                    <p className="mt-3 font-display text-sm font-bold text-text-ondark">
+                      — {t.authorName}
+                    </p>
                   </div>
-                  <p className="text-sm leading-relaxed text-text-ondark-dim">
-                    &ldquo;{t.text}&rdquo;
-                  </p>
-                  <p className="mt-3 font-display text-sm font-bold text-text-ondark">
-                    — {t.authorName}
-                  </p>
-                </div>
+                </Reveal>
               ))}
             </div>
           </div>
@@ -243,7 +256,7 @@ export default async function HomePage() {
       {/* Localização + Contato */}
       <section id="contato" className="scroll-mt-20 flex min-h-screen flex-col justify-center bg-ink py-16 text-text-ondark">
         <div id="localizacao" className="scroll-mt-20 mx-auto w-full max-w-6xl px-5">
-          <div className="grid grid-cols-1 overflow-hidden rounded-3xl border border-white/10 shadow-2xl lg:grid-cols-[.85fr_1.15fr]">
+          <Reveal className="grid grid-cols-1 overflow-hidden rounded-3xl border border-white/10 shadow-2xl lg:grid-cols-[.85fr_1.15fr]">
             <div className="bg-ink-soft p-8 lg:p-12">
               <p className="flex items-center gap-2 font-data text-xs uppercase tracking-widest text-accent">
                 <span className="h-px w-4 bg-accent" />
@@ -322,7 +335,7 @@ export default async function HomePage() {
                 referrerPolicy="no-referrer-when-downgrade"
               />
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
     </>

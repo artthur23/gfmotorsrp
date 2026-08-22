@@ -78,6 +78,12 @@ body {
   .animate-marquee {
     animation: none;
   }
+
+  [data-reveal] {
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 
 .range-accent {
