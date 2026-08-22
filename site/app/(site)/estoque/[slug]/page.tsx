@@ -81,29 +81,29 @@ export default async function VehiclePage({
           <VehicleGallery photos={photos} title={vehicleTitle(vehicle)} />
         </div>
 
-        <div className="min-w-0 rounded-3xl border border-line-dark bg-ink p-7 text-text-ondark">
+        <div className="min-w-0 rounded-3xl border border-line-dark bg-ink p-6 text-text-ondark">
           <p className="flex items-center gap-2 font-data text-xs font-semibold uppercase tracking-widest text-accent">
             <span className="h-px w-4 bg-accent" />
             {vehicle.brand} • {vehicle.yearModel}
           </p>
-          <h1 className="mt-3 font-display text-2xl font-extrabold leading-tight sm:text-3xl">
+          <h1 className="mt-2 font-display text-2xl font-extrabold leading-tight sm:text-3xl">
             {vehicleTitle(vehicle)}
           </h1>
 
-          <p className="mt-6 font-data text-xs uppercase tracking-widest text-text-ondark-dim">
+          <p className="mt-5 font-data text-xs uppercase tracking-widest text-text-ondark-dim">
             Valor
           </p>
           <p className="mt-1 font-display text-4xl font-extrabold sm:text-5xl">
             {formatPrice(vehicle.price)}
           </p>
 
-          <div className="mt-6 grid grid-cols-2 gap-3">
+          <div className="mt-5 grid grid-cols-3 gap-2.5">
             {specs.map((s) => (
-              <div key={s.label} className="rounded-xl bg-ink-soft p-4">
-                <span className="flex size-9 items-center justify-center rounded-lg bg-accent/20 text-accent">
-                  <s.icon size={18} />
+              <div key={s.label} className="rounded-xl bg-ink-soft p-3">
+                <span className="flex size-8 items-center justify-center rounded-lg bg-accent/20 text-accent">
+                  <s.icon size={16} />
                 </span>
-                <p className="mt-3 text-[11px] uppercase tracking-wide text-text-ondark-dim">
+                <p className="mt-2 text-[10px] uppercase tracking-wide text-text-ondark-dim">
                   {s.label}
                 </p>
                 <p className="mt-0.5 text-sm font-bold text-text-ondark">{s.value}</p>
@@ -115,13 +115,13 @@ export default async function VehiclePage({
             href={whatsappLink(vehicleWhatsappMessage(vehicle))}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-6 flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-6 py-3.5 text-base font-semibold text-white transition-colors hover:bg-[#1fbd5a]"
+            className="mt-5 flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-6 py-3 text-base font-semibold text-white transition-colors hover:bg-[#1fbd5a]"
           >
             <WhatsAppGlyphIcon size={18} />
             Falar com um vendedor
           </a>
 
-          <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2">
+          <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2">
             <span className="flex items-center gap-1.5 text-xs text-text-ondark-dim">
               <CheckCircle2 size={14} className="text-[#25D366]" />
               Procedência verificada
