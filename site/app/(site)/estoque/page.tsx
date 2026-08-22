@@ -153,7 +153,7 @@ export default async function EstoquePage({
         {/* Conteúdo */}
         <div id="resultados">
           <div className="mb-7 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <form method="get" className="relative flex-1 sm:max-w-md">
+            <form method="get" className="relative flex-1">
               <Search
                 size={18}
                 className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-text-onlight-dim"
@@ -169,8 +169,10 @@ export default async function EstoquePage({
               {filters.sort && <input type="hidden" name="sort" value={filters.sort} />}
             </form>
 
-            <div className="flex items-center gap-3">
-              <span className="text-sm text-text-onlight-dim">{matchingCount} veículos</span>
+            <div className="flex shrink-0 items-center gap-3">
+              <span className="whitespace-nowrap text-sm text-text-onlight-dim">
+                {matchingCount} veículos
+              </span>
               <SortSelect defaultValue={filters.sort ?? ""} />
             </div>
           </div>

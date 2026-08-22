@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
+import { ChevronDown } from "lucide-react";
 
 const SORT_OPTIONS = [
   { value: "", label: "Ordenar por" },
@@ -25,16 +26,22 @@ export function SortSelect({ defaultValue }: { defaultValue: string }) {
   }
 
   return (
-    <select
-      defaultValue={defaultValue}
-      onChange={handleChange}
-      className="rounded-full border border-line-light bg-surface px-4 py-2.5 text-sm font-medium text-text-onlight outline-none focus:border-accent"
-    >
-      {SORT_OPTIONS.map((o) => (
-        <option key={o.value} value={o.value}>
-          {o.label}
-        </option>
-      ))}
-    </select>
+    <div className="relative">
+      <select
+        defaultValue={defaultValue}
+        onChange={handleChange}
+        className="appearance-none rounded-full border border-line-light bg-surface py-2.5 pl-4 pr-9 text-sm font-medium text-text-onlight outline-none focus:border-accent"
+      >
+        {SORT_OPTIONS.map((o) => (
+          <option key={o.value} value={o.value}>
+            {o.label}
+          </option>
+        ))}
+      </select>
+      <ChevronDown
+        size={16}
+        className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-text-onlight-dim"
+      />
+    </div>
   );
 }
