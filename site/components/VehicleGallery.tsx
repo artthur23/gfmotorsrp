@@ -123,18 +123,18 @@ export function VehicleGallery({ photos, title }: { photos: Photo[]; title: stri
       </div>
 
       {count > 1 && (
-        <div className="mt-2 grid grid-cols-4 gap-2 sm:grid-cols-6">
+        <div className="mt-2 grid grid-cols-5 gap-1.5 sm:grid-cols-7 lg:grid-cols-8">
           {photos.map((p, i) => (
             <button
               key={p.id}
               type="button"
               onClick={() => setIndex(i)}
               aria-label={`Ver foto ${i + 1}`}
-              className={`relative aspect-square overflow-hidden rounded-lg bg-ink transition-opacity ${
+              className={`relative aspect-square overflow-hidden rounded-md bg-ink transition-opacity ${
                 i === index ? "ring-2 ring-accent" : "opacity-60 hover:opacity-100"
               }`}
             >
-              <Image src={p.url} alt="" fill quality={75} sizes="120px" className="object-cover" />
+              <Image src={p.url} alt="" fill quality={75} sizes="90px" className="object-cover" />
             </button>
           ))}
         </div>
