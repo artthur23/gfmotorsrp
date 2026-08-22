@@ -101,7 +101,7 @@ export default async function HomePage() {
 
       {/* Destaques */}
       {topPriced.length > 0 && (
-        <section className="flex min-h-screen flex-col justify-center bg-ink px-5 py-16 text-text-ondark">
+        <section className="flex min-h-screen flex-col justify-center bg-[#24231F] px-5 py-16 text-text-ondark">
           <div className="mx-auto w-full max-w-6xl">
             <Reveal>
               <p className="flex items-center gap-2 font-data text-xs uppercase tracking-widest text-accent">
@@ -130,7 +130,7 @@ export default async function HomePage() {
 
       {/* Diferenciais */}
       {differentials.length > 0 && (
-        <section id="diferenciais" className="scroll-mt-20 flex min-h-screen flex-col justify-center bg-ink text-text-ondark">
+        <section id="diferenciais" className="scroll-mt-20 flex min-h-screen flex-col justify-center bg-[#24231F] text-text-ondark">
           <div className="mx-auto w-full max-w-6xl px-5 py-16">
             <Reveal>
               <p className="font-data text-xs uppercase tracking-widest text-accent">Diferenciais</p>
