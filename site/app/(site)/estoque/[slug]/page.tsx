@@ -171,7 +171,7 @@ export default async function VehiclePage({
           </h2>
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {similar.map((v) => (
-              <VehicleCard key={v.slug} vehicle={v} />
+              <VehicleCard key={v.slug} vehicle={v} variant="dark" />
             ))}
           </div>
         </section>
