@@ -8,6 +8,7 @@ import { formatKm, formatPrice, vehicleTitle } from "@/lib/format";
 import type { SearchableVehicle } from "@/lib/queries";
 
 const MAX_RESULTS = 30;
+const TRANSITION_MS = 200;
 
 export function VehicleSearchModal({
   open,
@@ -31,6 +32,31 @@ export function VehicleSearchModal({
     if (open) setQuery("");
   }
 
+  // Mantém o modal montado durante a animação de saída: `mounted` só vira
+  // false depois que a transição de fechar termina, e `visible` controla
+  // as classes que disparam a transição CSS de abrir/fechar. As duas
+  // reações imediatas (montar ao abrir, esconder ao fechar) são ajuste de
+  // estado durante a renderização; só o que depende de tempo (esperar um
+  // frame pra animar a entrada, esperar a transição pra desmontar) precisa
+  // de efeito de verdade.
+  const [mounted, setMounted] = useState(open);
+  const [visible, setVisible] = useState(open);
+
+  if (open && !mounted) setMounted(true);
+  if (!open && visible) setVisible(false);
+
+  useEffect(() => {
+    if (!open) return;
+    const raf = requestAnimationFrame(() => setVisible(true));
+    return () => cancelAnimationFrame(raf);
+  }, [open]);
+
+  useEffect(() => {
+    if (open) return;
+    const t = setTimeout(() => setMounted(false), TRANSITION_MS);
+    return () => clearTimeout(t);
+  }, [open]);
+
   useEffect(() => {
     if (!open) return;
     const t = setTimeout(() => inputRef.current?.focus(), 10);
@@ -38,7 +64,7 @@ export function VehicleSearchModal({
   }, [open]);
 
   useEffect(() => {
-    if (!open) return;
+    if (!mounted) return;
     function onKeyDown(e: KeyboardEvent) {
       if (e.key === "Escape") onClose();
     }
@@ -48,7 +74,7 @@ export function VehicleSearchModal({
       window.removeEventListener("keydown", onKeyDown);
       document.body.style.overflow = "";
     };
-  }, [open, onClose]);
+  }, [mounted, onClose]);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -62,15 +88,19 @@ export function VehicleSearchModal({
 
   const results = filtered.slice(0, MAX_RESULTS);
 
-  if (!open) return null;
+  if (!mounted) return null;
 
   return (
     <div
-      className="fixed inset-0 z-100 flex items-start justify-center bg-black/70 px-4 pt-20 backdrop-blur-sm sm:pt-28"
+      className={`fixed inset-0 z-100 flex items-start justify-center bg-black/70 px-4 pt-20 backdrop-blur-sm transition-opacity duration-200 ease-out sm:pt-28 ${
+        visible ? "opacity-100" : "opacity-0"
+      }`}
       onClick={onClose}
     >
       <div
-        className="flex max-h-[75vh] w-full max-w-2xl flex-col overflow-hidden rounded-2xl border border-white/10 bg-ink-soft shadow-2xl"
+        className={`flex max-h-[75vh] w-full max-w-2xl flex-col overflow-hidden rounded-2xl border border-white/10 bg-ink-soft shadow-2xl transition-all duration-200 ease-out ${
+          visible ? "translate-y-0 scale-100 opacity-100" : "-translate-y-3 scale-95 opacity-0"
+        }`}
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center gap-3 border-b border-white/10 px-5 py-4">
