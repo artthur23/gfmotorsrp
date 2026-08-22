@@ -4,8 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, MessageCircle, Search, X } from "lucide-react";
 import { whatsappLink } from "@/lib/format";
+import { VehicleSearchModal } from "@/components/VehicleSearchModal";
+import type { SearchableVehicle } from "@/lib/queries";
 
 const NAV_LINKS = [
   { href: "/", label: "Início" },
@@ -15,9 +17,16 @@ const NAV_LINKS = [
   { href: "/#contato", label: "Contato" },
 ];
 
-export function Header() {
+export function Header({
+  searchVehicles,
+  searchBrands,
+}: {
+  searchVehicles: SearchableVehicle[];
+  searchBrands: string[];
+}) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-50 border-b border-line-dark bg-ink/95 backdrop-blur">
@@ -46,23 +55,45 @@ export function Header() {
           })}
         </nav>
 
-        <a
-          href={whatsappLink("Olá! Vim pelo site da GF Motors e gostaria de mais informações.")}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hidden items-center gap-2 rounded-full bg-accent px-4 py-2 font-data text-xs font-medium tracking-wide text-white transition-colors hover:bg-accent-strong lg:flex"
-        >
-          WhatsApp
-        </a>
+        <div className="hidden items-center gap-3 lg:flex">
+          <button
+            type="button"
+            onClick={() => setSearchOpen(true)}
+            aria-label="Buscar veículos"
+            className="flex size-9 items-center justify-center rounded-full border border-white/15 text-text-ondark-dim transition-colors hover:border-white/30 hover:text-text-ondark"
+          >
+            <Search size={17} />
+          </button>
+          <a
+            href={whatsappLink("Olá! Vim pelo site da GF Motors e gostaria de mais informações.")}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 rounded-full bg-[#25D366] px-4 py-2 font-data text-xs font-medium tracking-wide text-white transition-colors hover:bg-[#1fbd5a]"
+          >
+            <MessageCircle size={15} />
+            WhatsApp
+          </a>
+        </div>
 
-        <button
-          type="button"
-          aria-label={open ? "Fechar menu" : "Abrir menu"}
-          onClick={() => setOpen((v) => !v)}
-          className="text-text-ondark lg:hidden"
-        >
-          {open ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        <div className="flex items-center gap-4 lg:hidden">
+          <button
+            type="button"
+            onClick={() => setSearchOpen(true)}
+            aria-label="Buscar veículos"
+            className="text-text-ondark"
+          >
+            <Search size={22} />
+          </button>
+
+          <button
+            type="button"
+            aria-label={open ? "Fechar menu" : "Abrir menu"}
+            onClick={() => setOpen((v) => !v)}
+            className="text-text-ondark"
+          >
+            {open ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
       {open && (
@@ -82,13 +113,21 @@ export function Header() {
               href={whatsappLink("Olá! Vim pelo site da GF Motors e gostaria de mais informações.")}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-3 flex items-center justify-center rounded-full bg-accent px-4 py-3 font-data text-xs font-medium tracking-wide text-white"
+              className="mt-3 flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-4 py-3 font-data text-xs font-medium tracking-wide text-white"
             >
+              <MessageCircle size={15} />
               Falar no WhatsApp
             </a>
           </nav>
         </div>
       )}
+
+      <VehicleSearchModal
+        open={searchOpen}
+        onClose={() => setSearchOpen(false)}
+        vehicles={searchVehicles}
+        brands={searchBrands}
+      />
     </header>
   );
 }

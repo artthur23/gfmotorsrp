@@ -15,6 +15,28 @@ const CARD_SELECT = {
   photos: { orderBy: { order: "asc" as const }, take: 1, select: { url: true } },
 };
 
+const SEARCH_SELECT = {
+  slug: true,
+  brand: true,
+  model: true,
+  version: true,
+  yearModel: true,
+  km: true,
+  price: true,
+  photos: { orderBy: { order: "asc" as const }, take: 1, select: { url: true } },
+};
+
+export type SearchableVehicle = Awaited<ReturnType<typeof getSearchableVehicles>>[number];
+
+/** Dataset leve pra busca instantânea no cabeçalho — carregado uma vez e filtrado no cliente. */
+export async function getSearchableVehicles() {
+  return prisma.vehicle.findMany({
+    where: { status: { not: "VENDIDO" } },
+    orderBy: { createdAt: "desc" },
+    select: SEARCH_SELECT,
+  });
+}
+
 export async function getFeaturedVehicles(limit = 8) {
   const featured = await prisma.vehicle.findMany({
     where: { featured: true, status: { not: "VENDIDO" } },
@@ -126,6 +148,18 @@ export async function getVehicles(filters: VehicleFilters = {}) {
 
 export async function getVehicleCount(filters: VehicleFilters = {}) {
   return prisma.vehicle.count({ where: buildVehicleWhere(filters) });
+}
+
+/** Marcas com mais veículos no estoque, pras pílulas de atalho da busca. */
+export async function getTopBrands(limit = 6) {
+  const rows = await prisma.vehicle.groupBy({
+    by: ["brand"],
+    where: { status: { not: "VENDIDO" } },
+    _count: { brand: true },
+    orderBy: { _count: { brand: "desc" } },
+    take: limit,
+  });
+  return rows.map((r) => r.brand);
 }
 
 export async function getVehicleBrands() {
