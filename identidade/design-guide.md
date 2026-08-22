@@ -8,19 +8,19 @@
 
 ## Cores
 
-- **Fundo principal:** #0E0F11 (chumbo, quase preto — herdado do gradiente do site antigo)
+- **Fundo principal:** #0A0A0B (chumbo, quase preto — atualizado pra bater com a paleta do site da Belloni Motors)
 
-- **Cor de destaque / CTA:** #A61E2B (vermelho, vindo do friso do escudo)
+- **Cor de destaque / CTA:** #EC182F (vermelho — trocado pro valor exato do site da Belloni Motors a pedido explícito do usuário; antes era #A61E2B, vindo do friso do escudo)
 
-- **Texto principal:** #F2F1EE sobre fundo escuro / #14161A sobre fundo claro
+- **Texto principal:** #FFFFFF sobre fundo escuro / #0A0A0B sobre fundo claro
 
-- **Fundo alternativo / cards:** #F1F2F2 (névoa, fundo claro) e #FFFFFF (branco, cards/superfícies)
+- **Fundo alternativo / cards:** #F6F4EF (creme, fundo claro) e #FFFFFF (branco, cards/superfícies)
 
 - **Cor proibida:** nenhuma definida até o momento
 
 - **Metal / cromado (detalhes, divisórias):** #9AA0A5
 
-- **Verde tricolor (uso raro, easter egg do escudo):** #2F6B4F
+- **Verde tricolor (uso raro, easter egg do escudo):** #006343 (também atualizado pra bater com o verde do Belloni)
 
 ---
 

@@ -16,4 +16,6 @@ Direto — prefere que eu aja e mostre o resultado (produção/print) em vez de 
 
 Peças e decisões visuais usam referências reais de concorrentes/benchmarks (ex: Belloni Motors, Anti Motors) como inspiração de direção e qualidade — adaptadas à identidade própria da GF Motors, sem cópia literal.
 
+**Exceção confirmada (2026-08-21):** o vermelho de destaque do site foi trocado pro valor exato do Belloni Motors (#EC182F), a pedido explícito do usuário, mesmo depois do Claude alertar que é a cor de marca de um concorrente direto. Vale reconfirmar caso surja pedido parecido pra outras cores/elementos — não presumir que "copiar literal" virou padrão geral.
+
 ## Preferências adicionais
