@@ -16,6 +16,8 @@
 
 - **Fundo alternativo / cards:** #F6F4EF (creme, fundo claro) e #FFFFFF (branco, cards/superfícies)
 
+- **Fundo secundário (seções de destaque na home, ex: "Destaques do estoque", "Diferenciais"):** #24231F
+
 - **Cor proibida:** nenhuma definida até o momento
 
 - **Metal / cromado (detalhes, divisórias):** #9AA0A5
@@ -48,6 +50,7 @@ Automotivo premium, moderno — não "quadrado". Seções ocupam a tela cheia (m
 - Border-radius dos cards: rounded-2xl / rounded-3xl em cards e imagens
 - Botões: rounded-full (pílula)
 - Sombras: discretas, shadow-lg/shadow-xl em cards e imagens de destaque
+- Ícones: preferir traços únicos e simples (ex: um check em vez de um badge com contorno recortado) — quando o ícone já fica dentro de um quadrado com borda vermelha, esse quadrado já funciona como "selo", o ícone não precisa repetir a forma
 
 ---
 
