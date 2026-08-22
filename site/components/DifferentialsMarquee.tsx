@@ -1,5 +1,5 @@
 import {
-  BadgeCheck,
+  Check,
   CreditCard,
   MessageCircle,
   Globe2,
@@ -7,7 +7,10 @@ import {
 } from "lucide-react";
 import type { Differential } from "@/lib/queries";
 
-const ICONS: LucideIcon[] = [BadgeCheck, CreditCard, MessageCircle, Globe2];
+// Ícones deliberadamente simples (traços únicos, sem formas
+// compostas tipo o selo do BadgeCheck) — o "selo" já é o próprio
+// quadrado com borda vermelha, o ícone não precisa repetir isso.
+const ICONS: LucideIcon[] = [Check, CreditCard, MessageCircle, Globe2];
 
 // Repeated enough times so a single track's natural width comfortably
 // exceeds any realistic viewport, even with just 1-2 differentials.
@@ -26,7 +29,7 @@ function Track({ items }: { items: Differential[] }) {
               className="flex size-9 shrink-0 items-center justify-center rounded-lg border border-accent bg-accent/30 text-accent"
               style={{ boxShadow: "0 0 10px 1.5px rgba(236,24,47,.6)" }}
             >
-              <Icon size={17} />
+              <Icon size={17} strokeWidth={1.75} />
             </span>
             <span className="whitespace-nowrap font-display text-base font-bold text-text-ondark">
               {d.titulo}
