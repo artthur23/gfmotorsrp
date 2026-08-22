@@ -6,6 +6,12 @@ import { ChevronLeft, ChevronRight, Expand, X } from "lucide-react";
 
 type Photo = { id: string; url: string };
 
+const MAIN_SIZES = "(min-width: 1024px) 660px, 100vw";
+// 75/90 são as únicas qualidades liberadas em next.config.ts (images.qualities).
+const MAIN_QUALITY = 75;
+const LIGHTBOX_SIZES = "90vw";
+const LIGHTBOX_QUALITY = 90;
+
 export function VehicleGallery({ photos, title }: { photos: Photo[]; title: string }) {
   const [index, setIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -34,17 +40,52 @@ export function VehicleGallery({ photos, title }: { photos: Photo[]; title: stri
 
   if (!current) return null;
 
+  // Anterior/próxima pré-carregadas no tamanho do viewer atual, pra trocar de
+  // foto (setas, miniaturas) ficar instantâneo em vez de esperar o fetch.
+  const neighborIndexes =
+    count > 1 ? Array.from(new Set([(index - 1 + count) % count, (index + 1) % count])) : [];
+
   return (
     <div>
       <div className="relative aspect-4/3 overflow-hidden rounded-2xl bg-ink">
         <Image
+          key={current.id}
           src={current.url}
           alt={title}
           fill
-          quality={90}
-          sizes="(min-width: 1024px) 660px, 100vw"
+          quality={MAIN_QUALITY}
+          sizes={MAIN_SIZES}
           className="object-cover"
           priority
+        />
+
+        {neighborIndexes.map((i) => (
+          <Image
+            key={`preload-${photos[i].id}`}
+            src={photos[i].url}
+            alt=""
+            fill
+            quality={MAIN_QUALITY}
+            sizes={MAIN_SIZES}
+            className="hidden"
+            priority
+            aria-hidden
+          />
+        ))}
+
+        {/* Pré-carrega a foto atual no tamanho do lightbox, em segundo plano,
+            pra abrir em tela cheia não esperar o fetch dessa variante maior. */}
+        <Image
+          key={`preload-lightbox-${current.id}`}
+          src={current.url}
+          alt=""
+          fill
+          quality={LIGHTBOX_QUALITY}
+          sizes={LIGHTBOX_SIZES}
+          className="hidden"
+          priority
+          fetchPriority="low"
+          aria-hidden
         />
 
         {count > 1 && (
@@ -130,13 +171,29 @@ export function VehicleGallery({ photos, title }: { photos: Photo[]; title: stri
             onClick={(e) => e.stopPropagation()}
           >
             <Image
+              key={current.id}
               src={current.url}
               alt={title}
               fill
-              quality={95}
-              sizes="90vw"
+              quality={LIGHTBOX_QUALITY}
+              sizes={LIGHTBOX_SIZES}
               className="object-contain"
+              priority
             />
+
+            {neighborIndexes.map((i) => (
+              <Image
+                key={`preload-lightbox-${photos[i].id}`}
+                src={photos[i].url}
+                alt=""
+                fill
+                quality={LIGHTBOX_QUALITY}
+                sizes={LIGHTBOX_SIZES}
+                className="hidden"
+                priority
+                aria-hidden
+              />
+            ))}
           </div>
 
           <button
