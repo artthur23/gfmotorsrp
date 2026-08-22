@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { AtSign, Clock, MapPin, MessageCircle, Phone, ShieldCheck, Star } from "lucide-react";
+import { AtSign, Clock, MapPin, Phone, ShieldCheck, Star } from "lucide-react";
+import { WhatsAppGlyphIcon } from "@/components/icons/BrandIcons";
 import { Button } from "@/components/Button";
 import { VehicleCard } from "@/components/VehicleCard";
 import { DifferentialsMarquee } from "@/components/DifferentialsMarquee";
@@ -259,7 +260,7 @@ export default async function HomePage() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-6 py-3 text-sm font-semibold text-[#0b1c12] transition-colors hover:bg-[#1fbd5a]"
                 >
-                  <MessageCircle size={17} /> Falar no WhatsApp
+                  <WhatsAppGlyphIcon size={17} /> Falar no WhatsApp
                 </a>
                 <a
                   href="https://www.instagram.com/gfmotorsrp/"

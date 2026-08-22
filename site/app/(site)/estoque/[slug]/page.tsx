@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Calendar, CheckCircle2, Fuel, Gauge, MessageCircle, Palette, Settings2 } from "lucide-react";
+import { Calendar, CheckCircle2, Fuel, Gauge, Palette, Settings2 } from "lucide-react";
+import { WhatsAppGlyphIcon } from "@/components/icons/BrandIcons";
 import { VehicleCard } from "@/components/VehicleCard";
 import { VehicleGallery } from "@/components/VehicleGallery";
 import { VehicleFeatures } from "@/components/VehicleFeatures";
@@ -116,7 +117,7 @@ export default async function VehiclePage({
             rel="noopener noreferrer"
             className="mt-6 flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-6 py-3.5 text-base font-semibold text-white transition-colors hover:bg-[#1fbd5a]"
           >
-            <MessageCircle size={18} />
+            <WhatsAppGlyphIcon size={18} />
             Falar com um vendedor
           </a>
 

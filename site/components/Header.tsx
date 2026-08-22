@@ -4,8 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { Menu, MessageCircle, Search, X } from "lucide-react";
+import { Menu, Search, X } from "lucide-react";
 import { whatsappLink } from "@/lib/format";
+import { WhatsAppGlyphIcon } from "@/components/icons/BrandIcons";
 import { VehicleSearchModal } from "@/components/VehicleSearchModal";
 import type { SearchableVehicle } from "@/lib/queries";
 
@@ -70,7 +71,7 @@ export function Header({
             rel="noopener noreferrer"
             className="flex items-center gap-2 rounded-full bg-[#25D366] px-4 py-2 font-data text-xs font-medium tracking-wide text-white transition-colors hover:bg-[#1fbd5a]"
           >
-            <MessageCircle size={15} />
+            <WhatsAppGlyphIcon size={15} />
             WhatsApp
           </a>
         </div>
@@ -115,7 +116,7 @@ export function Header({
               rel="noopener noreferrer"
               className="mt-3 flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-4 py-3 font-data text-xs font-medium tracking-wide text-white"
             >
-              <MessageCircle size={15} />
+              <WhatsAppGlyphIcon size={15} />
               Falar no WhatsApp
             </a>
           </nav>
