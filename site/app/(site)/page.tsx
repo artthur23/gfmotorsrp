@@ -145,9 +145,13 @@ export default async function HomePage() {
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
               {differentials.map((d, i) => (
                 <Reveal key={d.titulo} delay={Math.min(i, 6) * 60} className="h-full">
-                  <div className="h-full rounded-2xl border border-white/10 bg-ink-soft p-6">
-                    <ShieldCheck className="mb-3 text-accent" size={22} />
-                    <h3 className="font-display text-base font-bold">{d.titulo}</h3>
+                  <div className="group h-full rounded-2xl border border-white/10 bg-ink-soft p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-accent/50 hover:shadow-[0_20px_45px_-15px_rgba(236,24,47,.5)]">
+                    <span className="mb-3 flex size-11 items-center justify-center rounded-lg border border-accent/40 bg-accent/10 text-accent transition-all duration-300 group-hover:scale-110 group-hover:border-accent group-hover:bg-accent/25">
+                      <ShieldCheck size={20} />
+                    </span>
+                    <h3 className="font-display text-base font-bold transition-colors duration-300 group-hover:text-accent">
+                      {d.titulo}
+                    </h3>
                     <p className="mt-1 text-sm text-text-ondark-dim">{d.texto}</p>
                   </div>
                 </Reveal>
