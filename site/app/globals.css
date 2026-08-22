@@ -20,9 +20,14 @@
   --color-text-ondark-dim: #9d9d9d;
   --color-tricolor-green: #006343;
 
-  /* Altura real do <Header/> (logo 48px + py-3 + borda) — usado pra
-     compensar o espaço que ele deixa de ocupar ao virar `fixed`. */
-  --header-h: 74px;
+  /* Altura real do <Header/> (logo 48px + py-3 + borda ≈ 74.16px,
+     varia um pouco conforme a fonte carregada), usado pra compensar o
+     espaço que ele deixa de ocupar ao virar `fixed`. Arredondado pra
+     BAIXO de propósito: um valor menor só sobrepõe 1-2px de conteúdo
+     por baixo do header opaco (invisível); um valor maior deixaria uma
+     frestinha clara do fundo da página aparecendo — por isso nunca
+     arredondar pra cima aqui. */
+  --header-h: 73px;
 }
 
 @theme inline {

@@ -51,7 +51,7 @@ export function Header({
       className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
         transparent
           ? "border-b border-transparent bg-transparent"
-          : "border-b border-line-dark bg-ink/95 backdrop-blur"
+          : "border-b border-line-dark bg-ink"
       }`}
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-3">
