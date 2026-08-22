@@ -8,6 +8,7 @@ const VARIANTS = {
   primary: "bg-accent text-white hover:bg-accent-strong",
   ghost: "border border-white/25 text-text-ondark hover:bg-white/10",
   outline: "border border-ink text-ink hover:bg-ink hover:text-white",
+  whatsapp: "bg-[#25D366] text-white hover:bg-[#1fbd5a]",
 };
 
 type ButtonProps = {

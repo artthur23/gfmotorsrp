@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { AtSign, Clock, MapPin, Phone, ShieldCheck, Star } from "lucide-react";
+import { AtSign, Car, Clock, MapPin, Phone, ShieldCheck, Star } from "lucide-react";
 import { WhatsAppGlyphIcon } from "@/components/icons/BrandIcons";
 import { Button } from "@/components/Button";
 import { VehicleCard } from "@/components/VehicleCard";
@@ -57,14 +57,18 @@ export default async function HomePage() {
               direto do início ao pós-venda.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Button href="/estoque">Ver estoque</Button>
+              <Button href="/estoque">
+                <Car size={16} />
+                Ver veículos
+              </Button>
               <Button
-                variant="ghost"
+                variant="whatsapp"
                 href={whatsappLink("Olá! Vim pelo site da GF Motors e gostaria de mais informações.")}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Falar no WhatsApp
+                <WhatsAppGlyphIcon size={16} />
+                WhatsApp
               </Button>
             </div>
           </div>
