@@ -1,5 +1,17 @@
 import Image from "next/image";
-import { AtSign, Car, Clock, MapPin, Phone, ShieldCheck, Star } from "lucide-react";
+import {
+  AtSign,
+  Car,
+  Clock,
+  CreditCard,
+  Globe2,
+  Handshake,
+  MapPin,
+  Phone,
+  ShieldCheck,
+  Star,
+  type LucideIcon,
+} from "lucide-react";
 import { WhatsAppGlyphIcon } from "@/components/icons/BrandIcons";
 import { Button } from "@/components/Button";
 import { VehicleCard } from "@/components/VehicleCard";
@@ -21,6 +33,16 @@ import { whatsappLink } from "@/lib/format";
 export const revalidate = 3600;
 
 const ADDRESS = "Av. Professor João Fiúsa, 945 - B. Alto da Boa Vista, Ribeirão Preto - SP";
+
+// Escolhe um ícone que remeta ao conteúdo de cada diferencial (cadastrado
+// pelo admin, texto livre) em vez de repetir o mesmo ícone em todo card.
+function differentialIcon(titulo: string): LucideIcon {
+  const t = titulo.toLowerCase();
+  if (t.includes("financ")) return CreditCard;
+  if (t.includes("atendimento") || t.includes("suporte")) return Handshake;
+  if (t.includes("nacional") || t.includes("importad")) return Globe2;
+  return ShieldCheck;
+}
 
 export default async function HomePage() {
   const [featured, topPriced, differentials, about, testimonials, vehicleCount] = await Promise.all([
@@ -143,19 +165,22 @@ export default async function HomePage() {
               </h2>
             </Reveal>
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-              {differentials.map((d, i) => (
-                <Reveal key={d.titulo} delay={Math.min(i, 6) * 60} className="h-full">
-                  <div className="group h-full rounded-2xl border border-white/10 bg-ink-soft p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-accent/50 hover:shadow-[0_20px_45px_-15px_rgba(236,24,47,.5)]">
-                    <span className="mb-3 flex size-11 items-center justify-center rounded-lg border border-accent/40 bg-accent/10 text-accent transition-all duration-300 group-hover:scale-110 group-hover:border-accent group-hover:bg-accent/25">
-                      <ShieldCheck size={20} />
-                    </span>
-                    <h3 className="font-display text-base font-bold transition-colors duration-300 group-hover:text-accent">
-                      {d.titulo}
-                    </h3>
-                    <p className="mt-1 text-sm text-text-ondark-dim">{d.texto}</p>
-                  </div>
-                </Reveal>
-              ))}
+              {differentials.map((d, i) => {
+                const Icon = differentialIcon(d.titulo);
+                return (
+                  <Reveal key={d.titulo} delay={Math.min(i, 6) * 60} className="h-full">
+                    <div className="group h-full rounded-2xl border border-white/10 bg-ink-soft p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-accent/50 hover:shadow-[0_20px_45px_-15px_rgba(236,24,47,.5)]">
+                      <span className="mb-3 flex size-11 items-center justify-center rounded-lg border border-accent/40 bg-accent/10 text-accent transition-all duration-300 group-hover:scale-110 group-hover:border-accent group-hover:bg-accent/25">
+                        <Icon size={20} />
+                      </span>
+                      <h3 className="font-display text-base font-bold transition-colors duration-300 group-hover:text-accent">
+                        {d.titulo}
+                      </h3>
+                      <p className="mt-1 text-sm text-text-ondark-dim">{d.texto}</p>
+                    </div>
+                  </Reveal>
+                );
+              })}
             </div>
           </div>
         </section>
